@@ -1,0 +1,36 @@
+# CodeVisionAVR output and temporary files
+*.hex
+*.eep
+*.obj
+*.map
+*.sym
+*.lst
+*.dep
+*.bak
+*.tmp
+*.d
+*.log
+
+# Generated project build files
+*.aps
+*.opt
+*.plg
+*.lk
+# Generated project build folders
+**/release
+**/debug
+
+# IntelliSense and indexing files (if using an IDE)
+*.ncb
+*.sdf
+*.suo
+*.user
+*.ipch
+
+# Backup files
+*~
+*.old
+
+# OS files
+.DS_Store
+Thumbs.db

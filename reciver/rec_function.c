@@ -1,0 +1,97 @@
+#include <mega8.h>
+#include <string.h>
+#include <delay.h>
+#include "rec_function.h"
+
+// получение байтов
+char uart_receive(void) {
+    while (!(UCSRA & (1 << RXC)));
+    return UDR;
+}
+// отправка байта
+void uart_transmit(char data) {
+    while (!(UCSRA & (1 << UDRE)));
+    UDR = data;
+}
+// отправка строки
+void uart_send(char *str) {
+    while (*str) {
+        uart_transmit(*str++);
+    }
+}
+// отправка строки несколько раз
+void uart_send_times(char *str, char count) {
+    unsigned char i = 0;
+    for (i = 0; i < count; i++) {
+    while (*str) {
+    uart_transmit(*str++);
+    }
+    delay_ms(50);
+    } 
+
+}
+// Преобразование 2 символов HEX в байт
+unsigned char hex2byte(char high, char low) {
+    unsigned char value = 0;
+
+    if (high >= '0' && high <= '9') value = (high - '0') << 4;
+    else if (high >= 'A' && high <= 'F') value = (high - 'A' + 10) << 4;
+
+    if (low >= '0' && low <= '9') value |= (low - '0');
+    else if (low >= 'A' && low <= 'F') value |= (low - 'A' + 10);
+
+    return value;
+}
+// Проверка контрольной суммы
+char check_checksum(char *buffer) {
+    unsigned char checksum = 0;
+    unsigned char id_byte;
+    unsigned char i = 0;
+    unsigned char received_checksum;
+
+    // XOR первых 5 байт ID (10 символов -> 5 байт)
+    for (i = 1; i < 11; i += 2) {
+        id_byte = hex2byte(buffer[i], buffer[i+1]);
+        checksum ^= id_byte;
+    }
+
+    // Получение байта контрольной суммы из ASCII
+    received_checksum = hex2byte(buffer[11], buffer[12]);
+
+    return (checksum == received_checksum);
+}
+// Преобразуем число в строку десятичного формата
+void my_ltoa(unsigned long value, char *str) {
+    char buffer[20]; // Временный буфер для цифр
+    char i = 0;
+    char j = 0;
+    
+    if (value == 0) {
+        str[0] = '0';
+        str[1] = '\0';
+        return;
+    }
+
+    // Разбираем число на цифры с конца
+    while (value > 0) {
+        buffer[i++] = '0' + (value % 10);
+        value /= 10;
+    }
+
+    // Переворачиваем строку
+    while (i > 0) {
+        str[j++] = buffer[--i];
+    }
+    str[j] = '\0';
+}
+void hex_id_to_decimal_string(char *hex_str, char *dec_str) {
+    unsigned long id = 0;
+    unsigned char i;
+    // Преобразуем 8 HEX-символов в 4 байт и собираем как одно число
+    for (i = 0; i < 8; i += 2) {
+        id = (id << 8) | hex2byte(hex_str[i], hex_str[i + 1]);
+    }
+
+    // Преобразуем число в строку десятичного формата
+    my_ltoa(id, dec_str);
+}
