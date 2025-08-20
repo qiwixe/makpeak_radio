@@ -8,6 +8,19 @@ char RAM_RFID_buffer[RFID_PACKET_LENGTH];
 char RFID_buffer[RFID_PACKET_LENGTH];
 unsigned char RFID_index = 0;
 
+// Обработчик прерывания от INT1 (PD3)
+interrupt [EXT_INT1] void ext_int1_isr(void)
+{
+    if ((PIND & (1<<3)) == 0)  // проверяем PIND.3
+    {
+        PORTB |= (1<<2);       // включаем PB2
+    }
+    else
+    {
+        PORTB &= ~(1<<2);      // выключаем PB2
+    }
+}
+
 void main(void)
 {
 // Declare your local variables here
@@ -23,6 +36,20 @@ UCSRB=(0<<RXCIE) | (0<<TXCIE) | (0<<UDRIE) | (1<<RXEN) | (1<<TXEN) | (0<<UCSZ2) 
 UCSRC=(1<<URSEL) | (0<<UMSEL) | (0<<UPM1) | (0<<UPM0) | (0<<USBS) | (1<<UCSZ1) | (1<<UCSZ0) | (0<<UCPOL);
 UBRRH=0x00;
 UBRRL=0x33;
+
+    // Настройка PB2 как выход
+    DDRB |= (1<<2);
+    PORTB &= ~(1<<2);       // по умолчанию выключен
+
+    // Настраиваем PD3 как вход с подтяжкой
+    DDRD &= ~(1<<3);
+    PORTD |= (1<<3);           // включаем pull-up
+
+    // Настройка внешнего прерывания INT1
+    MCUCR |= (1<<ISC10);    // прерывание по любому изменению уровня
+    GICR  |= (1<<INT1);     // разрешаем INT1
+    #asm("sei")             // глобально разрешаем прерывания
+    
 while (1) { 
     ch = uart_receive();
         if (ch == 0x02) {
@@ -38,7 +65,7 @@ while (1) {
             if (RFID_buffer[13] == 0x03 && check_checksum(RFID_buffer) && memcmp(RFID_buffer, RAM_RFID_buffer, RFID_PACKET_LENGTH) != 0) {
             // Если контрольная сумма верна,метка отличается от предыдущей, запоминаем метку и отсылаем
                 memcpy(RAM_RFID_buffer, RFID_buffer, RFID_PACKET_LENGTH);
-                uart_send_times();
+                uart_send_times(RFID_buffer,5);
             }
         }  
     }

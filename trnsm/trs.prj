@@ -9,7 +9,7 @@ D=01.08.2025
 Files=2
 OpenedFiles=3
 OF1=trs.c
-ActiveTab=2
+ActiveTab=1
 DebugOutputListFilesDirectory=Debug\List
 DebugOutputObjectFilesDirectory=Debug
 DebugOutputExecutableFilesDirectory=Debug\Exe
@@ -132,8 +132,8 @@ UseEEPROMLocation0=1
 DisplayCodeSizeError=1
 RebuildAll=0
 LinkageInformationPresent=1
-COFFileTimeStamp=1527213754
-Build=76
+COFFileTimeStamp=1528071206
+Build=85
 GlobalVarAddr=380
 EEPROMVarAddr=0
 [DefinedSymbolsDebug]
@@ -243,7 +243,7 @@ DisplayCodeSizeError=1
 RebuildAll=1
 LinkageInformationPresent=0
 COFFileTimeStamp=-1
-Build=76
+Build=85
 IncludePath0=E:\cvavr\inc
 IncludePath1=
 IncludePath2=
@@ -503,8 +503,8 @@ L13=Enhanced function parameters passing: Mode 2
 L14=Automatic register allocation: Yes
 L15=Smart register allocation: Yes
 L16=
-L17=Build: 76
-L18=5968 line(s) compiled
+L17=Build: 85
+L18=5990 line(s) compiled
 L19=No errors
 L20=No warnings
 L21=
@@ -524,19 +524,19 @@ L34=Heap size: 0 byte(s)
 L35=
 Lines=38
 L36=EEPROM usage: 0 byte(s), 0,0% of EEPROM
-L37=Program size: 322 words (644 bytes), 7,9% of FLASH
-L38=4 words (8 bytes), 1,2% reduced by Code Compression
+L37=Program size: 340 words (680 bytes), 8,3% of FLASH
+L38=7 words (14 bytes), 2,0% reduced by Code Compression
 [BuildInfoAssembler]
 Lines=12
 L1=AVRASM: AVR macro assembler 2.1.30 (build 592 Nov  7 2008 12:38:17)
 L2=Copyright (C) 1995-2008 ATMEL Corporation
 L3=
-L4=C:\Users\qiwix\OneDrive\Desktop\trnsm\Debug\List\trs.asm(1691): No EEPROM data, deleting C:\Users\qiwix\OneDrive\Desktop\trnsm\Debug\Exe\trs.eep
+L4=C:\Users\qiwix\OneDrive\Desktop\makpeak_radio\trnsm\Debug\List\trs.asm(1732): No EEPROM data, deleting C:\Users\qiwix\OneDrive\Desktop\makpeak_radio\trnsm\Debug\Exe\trs.eep
 L5=
 L6=ATmega8 memory use summary [bytes]:
 L7=Segment   Begin    End      Code   Data   Used    Size   Use%
 L8=---------------------------------------------------------------
-L9=[.cseg] 0x000000 0x000284    634     10    644    8192   7.9%
+L9=[.cseg] 0x000000 0x0002a8    670     10    680    8192   8.3%
 L10=[.dseg] 0x000060 0x00017c      0     28     28    1024   2.7%
 L11=[.eseg] 0x000000 0x000000      0      0      0     512   0.0%
 L12=
@@ -545,7 +545,7 @@ Row=0
 Column=0
 ScrollPosX=0
 ScrollPosY=0
-TimeStamp=1527214384
+TimeStamp=1527934820
 [BookmarksFoldedCode]
 Files=7
 F1=C:\Users\qiwix\OneDrive\Desktop\trnsm\trs.c
@@ -591,8 +591,8 @@ BK8=-1
 BK9=-1
 [Bookmarks3]
 TimeStamp=1527214358
-Row=29
-Column=43
+Row=24
+Column=12
 ScrollPosX=0
 ScrollPosY=0
 BK0=-1
@@ -650,32 +650,12 @@ BK8=-1
 BK9=-1
 [FoldedCode5]
 Blocks=0
-[HeadersList]
-Files=2
-F1=C:\Users\qiwix\OneDrive\Desktop\trnsm\trs.c
-F2=C:\Users\qiwix\OneDrive\Desktop\trnsm\trs_function.c
-[Header1]
-Files=5
-F1=E:\cvavr\inc\mega8.h
-F2=E:\cvavr\inc\mega8_bits.h
-F3=E:\cvavr\inc\delay.h
-F4=E:\cvavr\inc\string.h
-F5=trs_function.h
-[Header2]
-Files=5
-F1=E:\cvavr\inc\mega8.h
-F2=E:\cvavr\inc\mega8_bits.h
-F3=E:\cvavr\inc\string.h
-F4=E:\cvavr\inc\delay.h
-F5=trs_function.h
-[FoldedCode3]
-Blocks=0
 [Bookmarks6]
 TimeStamp=1527213753
 Row=19
 Column=51
 ScrollPosX=0
-ScrollPosY=17
+ScrollPosY=0
 BK0=-1
 BK1=-1
 BK2=-1
@@ -686,8 +666,6 @@ BK6=-1
 BK7=-1
 BK8=-1
 BK9=-1
-[FoldedCode6]
-Blocks=0
 [Bookmarks7]
 TimeStamp=1527213753
 Row=10
@@ -704,5 +682,27 @@ BK6=-1
 BK7=-1
 BK8=-1
 BK9=-1
+[FoldedCode3]
+Blocks=0
+[FoldedCode6]
+Blocks=0
 [FoldedCode7]
 Blocks=0
+[HeadersList]
+Files=2
+F1=C:\Users\qiwix\OneDrive\Desktop\makpeak_radio\trnsm\trs.c
+F2=C:\Users\qiwix\OneDrive\Desktop\makpeak_radio\trnsm\trs_function.c
+[Header1]
+Files=5
+F1=E:\cvavr\inc\mega8.h
+F2=E:\cvavr\inc\mega8_bits.h
+F3=E:\cvavr\inc\delay.h
+F4=E:\cvavr\inc\string.h
+F5=trs_function.h
+[Header2]
+Files=5
+F1=E:\cvavr\inc\mega8.h
+F2=E:\cvavr\inc\mega8_bits.h
+F3=E:\cvavr\inc\string.h
+F4=E:\cvavr\inc\delay.h
+F5=trs_function.h
