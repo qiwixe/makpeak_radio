@@ -119,13 +119,13 @@ while (1)
         delay_ms(2000);
         */
         send_rfid_packet(tagID);
-        delay_ms(2000);
+        delay_ms(5000);
         send_rfid_packet(tagID1);
-        delay_ms(2000);
+        delay_ms(5000);
         send_rfid_packet(tagID2);
-        delay_ms(2000);
+        delay_ms(5000);
         send_rfid_packet(tagID3);
-        delay_ms(2000);
+        delay_ms(5000);
         //while (!(UCSRA & (1 << UDRE)));
         //UDR = 0x55;
         //delay_ms(500);

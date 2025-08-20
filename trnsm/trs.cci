@@ -1,11 +1,14 @@
-VERSION:3 SOURCE_TIMESTAMP:5B148425
+VERSION:3 SOURCE_TIMESTAMP:5B14ADCC
 NODE:I LEVEL:0 LINE:1 "E:\cvavr\inc\mega8.h"
 NODE:I LEVEL:0 LINE:2 "E:\cvavr\inc\delay.h"
 NODE:I LEVEL:0 LINE:3 "E:\cvavr\inc\string.h"
-NODE:I LEVEL:0 LINE:4 "C:\Users\qiwix\OneDrive\Desktop\makpeak_radio\trnsm\trs_function.h"
+NODE:I LEVEL:0 LINE:4 "E:\cvavr\inc\stdio.h"
+NODE:I LEVEL:0 LINE:5 "C:\Users\qiwix\OneDrive\Desktop\makpeak_radio\trnsm\trs_function.h"
 NODE:M LEVEL:0 LINE:6 "RFID_PACKET_LENGTH"
 NODE:V LEVEL:0 LINE:7 "RAM_RFID_buffer -> RAM:????"
 NODE:V LEVEL:0 LINE:8 "RFID_buffer -> RAM:????"
 NODE:V LEVEL:0 LINE:9 "RFID_index -> R5"
-NODE:F LEVEL:0 LINE:12 "ext_int1_isr(void)"
-NODE:F LEVEL:0 LINE:24 "main(void)"
+NODE:V LEVEL:0 LINE:10 "seconds -> R6,R7"
+NODE:F LEVEL:0 LINE:14 "ext_int1_isr(void)"
+NODE:F LEVEL:0 LINE:20 "timer1_ovf_isr(void)"
+NODE:F LEVEL:0 LINE:28 "main(void)"

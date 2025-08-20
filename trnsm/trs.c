@@ -1,30 +1,36 @@
 #include <mega8.h>
 #include <delay.h>
 #include <string.h>
+#include <stdio.h>
 #include "trs_function.h"
-
 #define RFID_PACKET_LENGTH 14
 char RAM_RFID_buffer[RFID_PACKET_LENGTH];
 char RFID_buffer[RFID_PACKET_LENGTH];
 unsigned char RFID_index = 0;
+unsigned int seconds = 0;
 
-// Обработчик прерывания от INT1 (PD3)
+// Обработчик прерывания от геркона (PD3)
+// --- Прерывание от INT1 (геркон) ---
 interrupt [EXT_INT1] void ext_int1_isr(void)
 {
-    if ((PIND & (1<<3)) == 0)  // проверяем PIND.3
-    {
-        PORTB |= (1<<2);       // включаем PB2
-    }
-    else
-    {
-        PORTB &= ~(1<<2);      // выключаем PB2
+    PORTB.2 = 1;   // включаем PB2
+    seconds = 0;       // обнуляем счётчик
+}
+// --- Прерывание от Timer1 Overflow ---
+interrupt [TIM1_OVF] void timer1_ovf_isr(void)
+{
+    seconds++;
+    if (seconds >= 7) {  
+        PORTB.2 = 0; 
+        seconds = 0;     // сброс счетчика
     }
 }
-
 void main(void)
 {
 // Declare your local variables here
 char ch;
+//UART
+{
 // USART initialization
 // Communication Parameters: 8 Data, 1 Stop, No Parity
 // USART Receiver: On
@@ -36,22 +42,36 @@ UCSRB=(0<<RXCIE) | (0<<TXCIE) | (0<<UDRIE) | (1<<RXEN) | (1<<TXEN) | (0<<UCSZ2) 
 UCSRC=(1<<URSEL) | (0<<UMSEL) | (0<<UPM1) | (0<<UPM0) | (0<<USBS) | (1<<UCSZ1) | (1<<UCSZ0) | (0<<UCPOL);
 UBRRH=0x00;
 UBRRL=0x33;
-
-    // Настройка PB2 как выход
+}
+//Геркон
+{    
+    // --- PB2 как выход ---
     DDRB |= (1<<2);
-    PORTB &= ~(1<<2);       // по умолчанию выключен
+    PORTB &= ~(1<<2);  // изначально выключен
 
-    // Настраиваем PD3 как вход с подтяжкой
+    // --- PD3 (геркон) как вход с подтяжкой ---
     DDRD &= ~(1<<3);
-    PORTD |= (1<<3);           // включаем pull-up
+    PORTD |= (1<<3);
 
-    // Настройка внешнего прерывания INT1
-    MCUCR |= (1<<ISC10);    // прерывание по любому изменению уровня
-    GICR  |= (1<<INT1);     // разрешаем INT1
-    #asm("sei")             // глобально разрешаем прерывания
-    
-while (1) { 
-    ch = uart_receive();
+    // --- Настройка INT1 ---
+    MCUCR |= (1<<ISC11); // прерывание по спаду
+    GICR  |= (1<<INT1);
+}    
+// Настройка ADC1
+{
+ADMUX = (1<<REFS0) | (1<<MUX0);  // AVCC, ADC1
+ADCSRA = (1<<ADEN) | (1<<ADPS2)|(1<<ADPS1)|(1<<ADPS0); // делитель 128
+}
+// Настройка таймера
+{
+    TCCR1A = 0x00;
+    TCCR1B = (1<<CS12) | (0<<CS11) | (1<<CS10);
+    TIMSK |= (1<<TOIE1);
+}
+#asm("sei")             // глобально разрешаем прерывания    
+while (1) {
+    //printf("adc1 = %f\r\n", adc1_read());
+        ch = uart_receive();
         if (ch == 0x02) {
             RFID_index = 0;
             RFID_buffer[RFID_index++] = ch;
@@ -66,6 +86,7 @@ while (1) {
             // Если контрольная сумма верна,метка отличается от предыдущей, запоминаем метку и отсылаем
                 memcpy(RAM_RFID_buffer, RFID_buffer, RFID_PACKET_LENGTH);
                 uart_send_times(RFID_buffer,5);
+                PORTB.2 = 0;      // выключаем ридер (PB2)
             }
         }  
     }

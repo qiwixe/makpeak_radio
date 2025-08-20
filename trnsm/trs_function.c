@@ -60,4 +60,21 @@ char check_checksum(char *buffer) {
 
     return (checksum == received_checksum);
 }
+float adc1_read(){
+    char r1 = 10000;
+    char r2 = 1000;
+    unsigned int adc_value;
+    float voltage;
+    // Запуск преобразования
+    ADCSRA |= (1<<ADSC);
+    while(ADCSRA & (1<<ADSC)); // ждём окончания
+
+    adc_value = ADCW; // 10-битное значение ADC 0–1023
+
+    // Переводим в напряжение
+    voltage = adc_value * 5.0 / 1023.0;
+    // Учитываем делитель
+    //voltage *= r2 / r1;
+    return voltage;
+}
 
