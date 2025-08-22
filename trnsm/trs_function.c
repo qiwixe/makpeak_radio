@@ -1,6 +1,7 @@
 #include <mega8.h>
 #include <string.h>
 #include <delay.h>
+#include <stdio.h>
 #include "trs_function.h"
 
 // получение байтов
@@ -23,12 +24,24 @@ void uart_send(char *str) {
 void uart_send_times(char *str, char count) {
     unsigned char i = 0;
     for (i = 0; i < count; i++) {
-    while (*str) {
-    uart_transmit(*str++);
-    }
+    uart_send(str);
     delay_ms(50);
     } 
+}
+int adc1_read(){
+    char r1 = 10000;
+    char r2 = 1000;
+    unsigned int adc_value;
+    // Запуск преобразования
+    ADCSRA |= (1<<ADSC);
+    while(ADCSRA & (1<<ADSC)); // ждём окончания
 
+    adc_value = ADCW; // 10-битное значение ADC 0–1023
+    // Учитываем делитель
+    //adc_value *= r2 / r1;
+    if (adc_value < 600) return 0;   // защита от выхода за границы
+    if (adc_value > 900) return 100; // защита от выхода за границы
+    return (adc_value - 600) * 100 / (900 - 600);
 }
 // Преобразование 2 символов HEX в байт
 unsigned char hex2byte(char high, char low) {
@@ -60,21 +73,52 @@ char check_checksum(char *buffer) {
 
     return (checksum == received_checksum);
 }
-float adc1_read(){
-    char r1 = 10000;
-    char r2 = 1000;
-    unsigned int adc_value;
-    float voltage;
-    // Запуск преобразования
-    ADCSRA |= (1<<ADSC);
-    while(ADCSRA & (1<<ADSC)); // ждём окончания
-
-    adc_value = ADCW; // 10-битное значение ADC 0–1023
-
-    // Переводим в напряжение
-    voltage = adc_value * 5.0 / 1023.0;
-    // Учитываем делитель
-    //voltage *= r2 / r1;
-    return voltage;
+// Преобразуем число в строку десятичного формата
+void my_ltoa(unsigned long value, char *str) {
+    char buffer[20]; // Временный буфер для цифр
+    char i = 0;
+    char j = 0;
+    if (value == 0) {
+        str[0] = '0';
+        str[1] = '\0';
+        return;
+    }
+    // Разбираем число на цифры с конца
+    while (value > 0) {
+        buffer[i++] = '0' + (value % 10);
+        value /= 10;
+    }
+    // Переворачиваем строку
+    while (i > 0) {
+        str[j++] = buffer[--i];
+    }
+    str[j] = '\0';
+}
+void hex_id_to_decimal_string(char *hex_str, char *dec_str) {
+    unsigned long id = 0;
+    unsigned char i;
+    // Преобразуем 8 HEX-символов в 4 байт и собираем как одно число
+    for (i = 0; i < 8; i += 2) {
+        id = (id << 8) | hex2byte(hex_str[i], hex_str[i + 1]);
+    }
+    // Преобразуем число в строку десятичного формата
+    my_ltoa(id, dec_str);
+}
+void build_message(char *src, char *dst) {
+    unsigned int sum = 0;
+    char *p = src;
+    while (*p) {
+        sum += *p;   // прибавляем ASCII-код
+        p++;
+    }
+    sprintf(dst, "!%02X%s", sum & 0xFF, src);     // формируем "!XXстрока"
 }
 
+char* get_tag(char *buffer){
+static char dec_str[16];
+char tag[10];
+ strncpy(tag, buffer + 3, 8);
+ tag[8] = '\0';
+ hex_id_to_decimal_string(tag, dec_str);
+ return dec_str; 
+}

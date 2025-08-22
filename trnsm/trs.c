@@ -6,29 +6,32 @@
 #define RFID_PACKET_LENGTH 14
 char RAM_RFID_buffer[RFID_PACKET_LENGTH];
 char RFID_buffer[RFID_PACKET_LENGTH];
+char MESSAGE_BUFFER[18];
 unsigned char RFID_index = 0;
-unsigned int seconds = 0;
+unsigned int timer = 0;
 
 // Обработчик прерывания от геркона (PD3)
 // --- Прерывание от INT1 (геркон) ---
 interrupt [EXT_INT1] void ext_int1_isr(void)
 {
     PORTB.2 = 1;   // включаем PB2
-    seconds = 0;       // обнуляем счётчик
+    timer = 0;       // обнуляем счётчик
 }
 // --- Прерывание от Timer1 Overflow ---
 interrupt [TIM1_OVF] void timer1_ovf_isr(void)
 {
-    seconds++;
-    if (seconds >= 7) {  
+    timer++;
+    if (timer >= 7) {  //1 это примено 8.5 сек
         PORTB.2 = 0; 
-        seconds = 0;     // сброс счетчика
+        timer = 0;     // сброс счетчика
     }
 }
 void main(void)
 {
 // Declare your local variables here
 char ch;
+char msg[18];
+char table[] = "33";
 //UART
 {
 // USART initialization
@@ -68,9 +71,14 @@ ADCSRA = (1<<ADEN) | (1<<ADPS2)|(1<<ADPS1)|(1<<ADPS0); // делитель 128
     TCCR1B = (1<<CS12) | (0<<CS11) | (1<<CS10);
     TIMSK |= (1<<TOIE1);
 }
+//Радиомодуль
+{
+  // --- PB0 как выход ---
+    DDRB |= (1<<0);
+}
 #asm("sei")             // глобально разрешаем прерывания    
 while (1) {
-    //printf("adc1 = %f\r\n", adc1_read());
+    //printf("adc1 = %d\r\n", adc1_read());
         ch = uart_receive();
         if (ch == 0x02) {
             RFID_index = 0;
@@ -82,11 +90,18 @@ while (1) {
             }
 
             // Проверяем стоп байт
-            if (RFID_buffer[13] == 0x03 && check_checksum(RFID_buffer) && memcmp(RFID_buffer, RAM_RFID_buffer, RFID_PACKET_LENGTH) != 0) {
-            // Если контрольная сумма верна,метка отличается от предыдущей, запоминаем метку и отсылаем
+            if (RFID_buffer[13] == 0x03 && check_checksum(RFID_buffer)) {
+                if (memcmp(RAM_RFID_buffer, RFID_buffer, RFID_PACKET_LENGTH) != 0){
+                // Если контрольная сумма верна,метка отличается от предыдущей, запоминаем метку и отсылаем
                 memcpy(RAM_RFID_buffer, RFID_buffer, RFID_PACKET_LENGTH);
-                uart_send_times(RFID_buffer,5);
-                PORTB.2 = 0;      // выключаем ридер (PB2)
+                
+                sprintf(msg, "=%s+%s+%d*", table, get_tag(RFID_buffer), adc1_read());   //формирование строки =СТОЛ+МЕТКА+ЗАРЯД*
+                build_message(msg, MESSAGE_BUFFER);                                     //расчет контрольной суммы и формирование строки !СУММА=СТОЛ+МЕТКА+ЗАРЯД*
+                PORTB.0 = 1;                                                            //вкл радиомодуль (PB0)
+                uart_send_times(MESSAGE_BUFFER,5);                                      //Отправка сообщения 5 раз
+                PORTB.0 = 0;                                                            //выкл радиомодуль (PB0)
+                PORTB.2 = 0;                                                            // выключаем ридер (PB2)
+            }
             }
         }  
     }

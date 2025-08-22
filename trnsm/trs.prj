@@ -7,9 +7,9 @@ A=
 C=
 D=01.08.2025
 Files=2
-OpenedFiles=3
+OpenedFiles=5
 OF1=trs.c
-ActiveTab=1
+ActiveTab=2
 DebugOutputListFilesDirectory=Debug\List
 DebugOutputObjectFilesDirectory=Debug
 DebugOutputExecutableFilesDirectory=Debug\Exe
@@ -20,14 +20,18 @@ OutputExecutableFilesDirectory=Release\Exe
 OutputLinkerFilesDirectory=Release\Link
 AllowDisplayFunctionCallTree=0
 CleanUp=2
-TimeStamp1=1528081753
+TimeStamp1=1528204592
 OF2=trs_function.c
-TimeStamp2=1528077125
+TimeStamp2=1528204436
 TimeStamp0=1527164177
 OF3=trs_function.h
-TimeStamp3=1528076787
+TimeStamp3=1528203657
 F1=trs.c
 F2=trs_function.c
+OF4=..\reciver\rec_function.c
+TimeStamp4=1527214960
+OF5=..\reciver\rec.c
+TimeStamp5=1527216553
 [CompilerDebug]
 Chip=ATmega8
 CPUClock=8000000
@@ -132,9 +136,9 @@ UseEEPROMLocation0=1
 DisplayCodeSizeError=1
 RebuildAll=0
 LinkageInformationPresent=1
-COFFileTimeStamp=1528081870
-Build=197
-GlobalVarAddr=384
+COFFileTimeStamp=1528204450
+Build=229
+GlobalVarAddr=418
 EEPROMVarAddr=0
 [DefinedSymbolsDebug]
 Count=0
@@ -243,7 +247,7 @@ DisplayCodeSizeError=1
 RebuildAll=1
 LinkageInformationPresent=0
 COFFileTimeStamp=-1
-Build=197
+Build=229
 IncludePath0=E:\cvavr\inc
 IncludePath1=
 IncludePath2=
@@ -503,8 +507,8 @@ L13=Enhanced function parameters passing: Mode 2
 L14=Automatic register allocation: Yes
 L15=Smart register allocation: Yes
 L16=
-L17=Build: 197
-L18=13171 line(s) compiled
+L17=Build: 229
+L18=13978 line(s) compiled
 L19=No errors
 L20=2 warning(s)
 L21=
@@ -512,33 +516,33 @@ L22=Bit variables size: 0 byte(s)
 L23=
 L24=Data Stack area: 0x60 to 0x15F
 L25=Data Stack size: 256 byte(s)
-L26=Estimated Data Stack usage: 17 byte(s)
+L26=Estimated Data Stack usage: 170 byte(s)
 L27=
-L28=RAM Global variables area: 0x160 to 0x17F
-L29=RAM Global variables size: 32 byte(s)
+L28=RAM Global variables area: 0x160 to 0x1A1
+L29=RAM Global variables size: 66 byte(s)
 L30=
-L31=Hardware Stack area: 0x180 to 0x45F
-L32=Hardware Stack size: 736 byte(s)
+L31=Hardware Stack area: 0x1A2 to 0x45F
+L32=Hardware Stack size: 702 byte(s)
 L33=
 L34=Heap size: 0 byte(s)
 L35=
 Lines=38
 L36=EEPROM usage: 0 byte(s), 0,0% of EEPROM
-L37=Program size: 387 words (774 bytes), 9,4% of FLASH
-L38=7 words (14 bytes), 1,8% reduced by Code Compression
+L37=Program size: 2516 words (5032 bytes), 61,4% of FLASH
+L38=360 words (720 bytes), 12,5% reduced by Code Compression
 L39=0 words (0 bytes), 0,0% reduced by Code Compression
 [BuildInfoAssembler]
 Lines=12
 L1=AVRASM: AVR macro assembler 2.1.30 (build 592 Nov  7 2008 12:38:17)
 L2=Copyright (C) 1995-2008 ATMEL Corporation
 L3=
-L4=C:\Users\qiwix\OneDrive\Desktop\makpeak_radio\trnsm\Debug\List\trs.asm(1848): No EEPROM data, deleting C:\Users\qiwix\OneDrive\Desktop\makpeak_radio\trnsm\Debug\Exe\trs.eep
+L4=C:\Users\qiwix\OneDrive\Desktop\makpeak_radio\trnsm\Debug\List\trs.asm(4442): No EEPROM data, deleting C:\Users\qiwix\OneDrive\Desktop\makpeak_radio\trnsm\Debug\Exe\trs.eep
 L5=
 L6=ATmega8 memory use summary [bytes]:
 L7=Segment   Begin    End      Code   Data   Used    Size   Use%
 L8=---------------------------------------------------------------
-L9=[.cseg] 0x000000 0x000306    738     36    774    8192   9.4%
-L10=[.dseg] 0x000060 0x000180      0     32     32    1024   3.1%
+L9=[.cseg] 0x000000 0x0013a8   4976     56   5032    8192  61.4%
+L10=[.dseg] 0x000060 0x0001a2      0     66     66    1024   6.4%
 L11=[.eseg] 0x000000 0x000000      0      0      0     512   0.0%
 L12=
 [Bookmarks0]
@@ -546,9 +550,9 @@ Row=0
 Column=0
 ScrollPosX=0
 ScrollPosY=0
-TimeStamp=1528081764
+TimeStamp=1528204836
 [BookmarksFoldedCode]
-Files=7
+Files=9
 F1=C:\Users\qiwix\OneDrive\Desktop\trnsm\trs.c
 F2=..\reciver\rec.c
 F3=trs.c
@@ -556,6 +560,8 @@ F4=C:\Users\qiwix\OneDrive\Desktop\trnsm\trs_function.c
 F5=C:\Users\qiwix\OneDrive\Desktop\trnsm\trs_function.h
 F6=trs_function.c
 F7=trs_function.h
+F8=..\tag\tag.c
+F9=..\reciver\rec_function.c
 [Bookmarks1]
 TimeStamp=1526819178
 Row=113
@@ -575,11 +581,11 @@ BK9=-1
 [FoldedCode1]
 Blocks=0
 [Bookmarks2]
-TimeStamp=1527085240
-Row=0
+TimeStamp=1527216553
+Row=38
 Column=0
 ScrollPosX=0
-ScrollPosY=0
+ScrollPosY=1
 BK0=-1
 BK1=-1
 BK2=-1
@@ -591,11 +597,11 @@ BK7=-1
 BK8=-1
 BK9=-1
 [Bookmarks3]
-TimeStamp=1528081753
-Row=64
-Column=21
+TimeStamp=1528204592
+Row=95
+Column=104
 ScrollPosX=0
-ScrollPosY=28
+ScrollPosY=26
 BK0=-1
 BK1=-1
 BK2=-1
@@ -606,8 +612,6 @@ BK6=-1
 BK7=-1
 BK8=-1
 BK9=-1
-[FoldedCode2]
-Blocks=0
 [USBLibrary]
 UseSuspend=0
 CDCVirtualSerialPort=0
@@ -652,11 +656,11 @@ BK9=-1
 [FoldedCode5]
 Blocks=0
 [Bookmarks6]
-TimeStamp=1528077125
-Row=61
-Column=37
+TimeStamp=1528204436
+Row=91
+Column=53
 ScrollPosX=0
-ScrollPosY=0
+ScrollPosY=77
 BK0=-1
 BK1=-1
 BK2=-1
@@ -668,8 +672,8 @@ BK7=-1
 BK8=-1
 BK9=-1
 [Bookmarks7]
-TimeStamp=1528076787
-Row=9
+TimeStamp=1528203657
+Row=13
 Column=5
 ScrollPosX=0
 ScrollPosY=0
@@ -683,14 +687,23 @@ BK6=-1
 BK7=-1
 BK8=-1
 BK9=-1
-[FoldedCode3]
-Line1=47
-Line2=61
-Line3=66
-Blocks=3
-[FoldedCode6]
-Blocks=0
-[FoldedCode7]
+[Bookmarks8]
+TimeStamp=1528081820
+Row=0
+Column=0
+ScrollPosX=0
+ScrollPosY=89
+BK0=-1
+BK1=-1
+BK2=-1
+BK3=-1
+BK4=-1
+BK5=-1
+BK6=-1
+BK7=-1
+BK8=-1
+BK9=-1
+[FoldedCode8]
 Blocks=0
 [HeadersList]
 Files=2
@@ -707,9 +720,44 @@ F6=E:\cvavr\inc\io.h
 F7=E:\cvavr\inc\stdarg.h
 F8=trs_function.h
 [Header2]
-Files=5
+Files=8
 F1=E:\cvavr\inc\mega8.h
 F2=E:\cvavr\inc\mega8_bits.h
 F3=E:\cvavr\inc\string.h
 F4=E:\cvavr\inc\delay.h
-F5=trs_function.h
+F5=E:\cvavr\inc\stdio.h
+F6=E:\cvavr\inc\io.h
+F7=E:\cvavr\inc\stdarg.h
+F8=trs_function.h
+[FoldedCode3]
+Line1=15
+Line2=21
+Line3=50
+Line4=64
+Line5=69
+Line6=75
+Blocks=6
+[FoldedCode6]
+Blocks=0
+[FoldedCode2]
+Blocks=0
+[Bookmarks9]
+TimeStamp=1527214960
+Row=90
+Column=39
+ScrollPosX=0
+ScrollPosY=50
+BK0=-1
+BK1=-1
+BK2=-1
+BK3=-1
+BK4=-1
+BK5=-1
+BK6=-1
+BK7=-1
+BK8=-1
+BK9=-1
+[FoldedCode9]
+Blocks=0
+[FoldedCode7]
+Blocks=0
