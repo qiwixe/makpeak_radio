@@ -1,9 +1,10 @@
 #include <mega8.h>
 #include <delay.h>
 #include <string.h>
+#include <stdio.h>
 #include "rec_function.h"
 // Declare your global variables here
-#define RFID_PACKET_LENGTH 14
+#define RFID_PACKET_LENGTH 18
 char RFID_buffer[RFID_PACKET_LENGTH];
 char RAM_RFID_buffer[RFID_PACKET_LENGTH];
 unsigned char RFID_index = 0;
@@ -28,15 +29,16 @@ void timer1_init(void) {
 }
 // Прерывание по совпадению с OCR1A
 interrupt [TIM1_COMPA] void timer1_compa_isr(void) {
-    memset(RFID_buffer, 0, RFID_PACKET_LENGTH);
+    memset(RAM_RFID_buffer, 0, RFID_PACKET_LENGTH);
 }
 
 void main(void)
 {
-// Declare your local variables here
 char ch;
-char tag[10];
-char dec_str[16];
+char tag[16];
+char dec_str[15];
+// UART
+{
 // USART initialization
 // Communication Parameters: 8 Data, 1 Stop, No Parity
 // USART Receiver: On
@@ -48,31 +50,29 @@ UCSRB=(0<<RXCIE) | (0<<TXCIE) | (0<<UDRIE) | (1<<RXEN) | (1<<TXEN) | (0<<UCSZ2) 
 UCSRC=(1<<URSEL) | (0<<UMSEL) | (0<<UPM1) | (0<<UPM0) | (0<<USBS) | (1<<UCSZ1) | (1<<UCSZ0) | (0<<UCPOL);
 UBRRH=0x00;
 UBRRL=0x33;
-
+}
+timer1_init();
 while (1) {
         ch = uart_receive();
-        if (ch == 0x02) {
+        //Проверка старт байта (!)
+        if (ch == '!') {
             RFID_index = 0;
             RFID_buffer[RFID_index++] = ch;
 
-            // Считываем оставшиеся 13 байт
+            // Считываем оставшиеся 17 байт
             while (RFID_index < RFID_PACKET_LENGTH) {
                 RFID_buffer[RFID_index++] = uart_receive();
             }
 
-            // Проверяем стоп байт
-            if (RFID_buffer[13] == 0x03 && check_checksum(RFID_buffer) && memcmp(RFID_buffer, RAM_RFID_buffer, RFID_PACKET_LENGTH) != 0) {
-            // Если контрольная сумма верна отправляет и запоминаем на 0.5 секунды, после сбрасываем память
-                memcpy(RAM_RFID_buffer, RFID_buffer, RFID_PACKET_LENGTH);
-                
-                strncpy(tag, &RFID_buffer[3], 8);  // Сохраняем 8 HEX символов без версии
-                tag[8] = '\0';
-                hex_id_to_decimal_string(tag, dec_str);
-                uart_send(dec_str);
+            // Проверяем стоп байт (*)
+            if (RFID_buffer[17] == '*' && check_checksum(RFID_buffer)) {                    //Если контрольная сумма верна
+                if (memcmp(RAM_RFID_buffer, RFID_buffer, RFID_PACKET_LENGTH) != 0){         //Метка отличается от предыдущей
+                memcpy(RAM_RFID_buffer, RFID_buffer, RFID_PACKET_LENGTH);                   //Запоминаем метку
+                strncpy(tag, &RFID_buffer[3], 15);                                          //Отсекание контрольной суммы
+                tag[16] = '\0';                                                             //Добавление метки конца строки
+                uart_send(tag);                                                             //отправление сообщения без контрольной суммы
             }
         }
-        
-        
     }
 }
-
+}

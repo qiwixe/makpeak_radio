@@ -1,5 +1,4 @@
-main DSTACK_USAGE:26 DSTACK_LEVEL:26 FILE:"rec.c" LINE:34
-hex_id_to_decimal_string DSTACK_USAGE:14 DSTACK_LEVEL:40 FILE:"rec_function.c" LINE:87
-my_ltoa DSTACK_USAGE:30 DSTACK_LEVEL:70 FILE:"rec_function.c" LINE:64
-timer1_compa_isr DSTACK_USAGE:12 DSTACK_LEVEL:82 FILE:"rec.c" LINE:30
-memset DSTACK_USAGE:5 DSTACK_LEVEL:87 FILE:"E:\cvavr\lib\string.lib" LINE:663
+main DSTACK_USAGE:31 DSTACK_LEVEL:31 FILE:"rec.c" LINE:35
+check_checksum DSTACK_USAGE:10 DSTACK_LEVEL:41 FILE:"rec_function.c" LINE:47
+timer1_compa_isr DSTACK_USAGE:12 DSTACK_LEVEL:53 FILE:"rec.c" LINE:31
+memset DSTACK_USAGE:5 DSTACK_LEVEL:58 FILE:"E:\cvavr\lib\string.lib" LINE:663

@@ -30,7 +30,7 @@ interrupt [TIM1_OVF] void timer1_ovf_isr(void)
 void main(void){
 char ch;
 char msg[18];
-char table[] = "33";
+char number_trs[] = "33";
 //UART
 {
 // USART initialization
@@ -94,16 +94,16 @@ while (1) {
             }
 
             // Проверяем стоп байт
-            if (RFID_buffer[13] == 0x03 && check_checksum(RFID_buffer)) {               //Если контрольная сумма верна
-                if (memcmp(RAM_RFID_buffer, RFID_buffer, RFID_PACKET_LENGTH) != 0){     //Метка отличается от предыдущей
-                memcpy(RAM_RFID_buffer, RFID_buffer, RFID_PACKET_LENGTH);               //Запоминаем метку
-                sprintf(msg, "=%s+%s+%d*", table, get_tag(RFID_buffer), adc1_read());   //Формирование строки =СТОЛ+МЕТКА+ЗАРЯД*
-                build_message(msg, MESSAGE_BUFFER);                                     //Расчет контрольной суммы и формирование строки !СУММА=СТОЛ+МЕТКА+ЗАРЯД*
-                PORTB.0 = 1;                                                            //Вкл радиомодуль (PB0)
-                uart_send_times(MESSAGE_BUFFER,5);                                      //Отправка сообщения 5 раз
-                PORTB.0 = 0;                                                            //Выкл радиомодуль (PB0)
-                PORTB.2 = 0;                                                            //Выключаем ридер (PB2)
-                PORTD.6 = 0;                                                            //Выключаем светодиод (PD2)
+            if (RFID_buffer[13] == 0x03 && check_checksum(RFID_buffer)) {                   //Если контрольная сумма верна
+                if (memcmp(RAM_RFID_buffer, RFID_buffer, RFID_PACKET_LENGTH) != 0){         //Метка отличается от предыдущей
+                memcpy(RAM_RFID_buffer, RFID_buffer, RFID_PACKET_LENGTH);                   //Запоминаем метку
+                sprintf(msg, "=%s+%s+%d*", number_trs, get_tag(RFID_buffer), adc1_read());  //Формирование строки =НОМЕР+МЕТКА+ЗАРЯД*
+                build_message(msg, MESSAGE_BUFFER);                                         //Расчет контрольной суммы и формирование строки !СУММА=СТОЛ+МЕТКА+ЗАРЯД*
+                PORTB.0 = 1;                                                                //Вкл радиомодуль (PB0)
+                uart_send_times(MESSAGE_BUFFER,5);                                          //Отправка сообщения 5 раз
+                PORTB.0 = 0;                                                                //Выкл радиомодуль (PB0)
+                PORTB.2 = 0;                                                                //Выключаем ридер (PB2)
+                PORTD.6 = 0;                                                                //Выключаем светодиод (PD2)
             }
             }
         }  

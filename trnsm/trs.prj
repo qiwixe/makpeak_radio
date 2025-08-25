@@ -7,9 +7,9 @@ A=
 C=
 D=01.08.2025
 Files=2
-OpenedFiles=5
-OF1=trs.c
-ActiveTab=2
+OpenedFiles=7
+OF1=rec_function.h
+ActiveTab=3
 DebugOutputListFilesDirectory=Debug\List
 DebugOutputObjectFilesDirectory=Debug
 DebugOutputExecutableFilesDirectory=Debug\Exe
@@ -20,18 +20,22 @@ OutputExecutableFilesDirectory=Release\Exe
 OutputLinkerFilesDirectory=Release\Link
 AllowDisplayFunctionCallTree=0
 CleanUp=2
-TimeStamp1=1528334565
-OF2=trs_function.c
-TimeStamp2=1528204436
+TimeStamp1=1527214960
+OF2=rec_function.c
+TimeStamp2=1528396859
 TimeStamp0=1527164177
-OF3=trs_function.h
-TimeStamp3=1528203657
+OF3=trs_function.c
+TimeStamp3=1528397030
 F1=trs.c
 F2=trs_function.c
-OF4=..\reciver\rec_function.c
-TimeStamp4=1527214960
-OF5=..\reciver\rec.c
-TimeStamp5=1527216553
+OF4=trs_function.h
+TimeStamp4=1528203657
+OF5=trs.c
+TimeStamp5=1528394565
+OF6=..\reciver\rec_function.c
+TimeStamp6=1528396859
+OF7=..\reciver\rec.c
+TimeStamp7=1528396904
 [CompilerDebug]
 Chip=ATmega8
 CPUClock=8000000
@@ -136,8 +140,8 @@ UseEEPROMLocation0=1
 DisplayCodeSizeError=1
 RebuildAll=0
 LinkageInformationPresent=1
-COFFileTimeStamp=1528332984
-Build=233
+COFFileTimeStamp=1528397033
+Build=235
 GlobalVarAddr=418
 EEPROMVarAddr=0
 [DefinedSymbolsDebug]
@@ -247,7 +251,7 @@ DisplayCodeSizeError=1
 RebuildAll=1
 LinkageInformationPresent=0
 COFFileTimeStamp=-1
-Build=233
+Build=235
 IncludePath0=E:\cvavr\inc
 IncludePath1=
 IncludePath2=
@@ -507,8 +511,8 @@ L13=Enhanced function parameters passing: Mode 2
 L14=Automatic register allocation: Yes
 L15=Smart register allocation: Yes
 L16=
-L17=Build: 233
-L18=13985 line(s) compiled
+L17=Build: 235
+L18=13981 line(s) compiled
 L19=No errors
 L20=2 warning(s)
 L21=
@@ -536,7 +540,7 @@ Lines=12
 L1=AVRASM: AVR macro assembler 2.1.30 (build 592 Nov  7 2008 12:38:17)
 L2=Copyright (C) 1995-2008 ATMEL Corporation
 L3=
-L4=C:\Users\qiwix\OneDrive\Desktop\makpeak_radio\trnsm\Debug\List\trs.asm(4454): No EEPROM data, deleting C:\Users\qiwix\OneDrive\Desktop\makpeak_radio\trnsm\Debug\Exe\trs.eep
+L4=C:\Users\qiwix\OneDrive\Desktop\makpeak_radio\trnsm\Debug\List\trs.asm(4452): No EEPROM data, deleting C:\Users\qiwix\OneDrive\Desktop\makpeak_radio\trnsm\Debug\Exe\trs.eep
 L5=
 L6=ATmega8 memory use summary [bytes]:
 L7=Segment   Begin    End      Code   Data   Used    Size   Use%
@@ -550,9 +554,9 @@ Row=0
 Column=0
 ScrollPosX=0
 ScrollPosY=0
-TimeStamp=1528334902
+TimeStamp=1528397037
 [BookmarksFoldedCode]
-Files=9
+Files=12
 F1=C:\Users\qiwix\OneDrive\Desktop\trnsm\trs.c
 F2=..\reciver\rec.c
 F3=trs.c
@@ -562,6 +566,9 @@ F6=trs_function.c
 F7=trs_function.h
 F8=..\tag\tag.c
 F9=..\reciver\rec_function.c
+F10=..\trnsm\trs.c
+F11=..\trnsm\trs_function.c
+F12=..\trnsm\trs_function.h
 [Bookmarks1]
 TimeStamp=1526819178
 Row=113
@@ -581,11 +588,11 @@ BK9=-1
 [FoldedCode1]
 Blocks=0
 [Bookmarks2]
-TimeStamp=1527216553
-Row=38
+TimeStamp=1528396904
+Row=0
 Column=0
 ScrollPosX=0
-ScrollPosY=1
+ScrollPosY=0
 BK0=-1
 BK1=-1
 BK2=-1
@@ -597,9 +604,9 @@ BK7=-1
 BK8=-1
 BK9=-1
 [Bookmarks3]
-TimeStamp=1528334565
-Row=89
-Column=119
+TimeStamp=1528394260
+Row=65
+Column=49
 ScrollPosX=0
 ScrollPosY=0
 BK0=-1
@@ -657,10 +664,10 @@ BK9=-1
 Blocks=0
 [Bookmarks6]
 TimeStamp=1528204436
-Row=91
-Column=53
+Row=106
+Column=73
 ScrollPosX=0
-ScrollPosY=53
+ScrollPosY=0
 BK0=-1
 BK1=-1
 BK2=-1
@@ -706,11 +713,11 @@ BK9=-1
 [FoldedCode8]
 Blocks=0
 [Bookmarks9]
-TimeStamp=1527214960
-Row=90
-Column=39
+TimeStamp=1528396859
+Row=0
+Column=0
 ScrollPosX=0
-ScrollPosY=50
+ScrollPosY=0
 BK0=-1
 BK1=-1
 BK2=-1
@@ -721,6 +728,19 @@ BK6=-1
 BK7=-1
 BK8=-1
 BK9=-1
+[FoldedCode3]
+Line1=14
+Line2=21
+Line3=35
+Line4=49
+Line5=67
+Line6=72
+Line7=78
+Blocks=7
+[FoldedCode6]
+Blocks=0
+[FoldedCode7]
+Blocks=0
 [HeadersList]
 Files=2
 F1=C:\Users\qiwix\OneDrive\Desktop\makpeak_radio\trnsm\trs.c
@@ -745,20 +765,61 @@ F5=E:\cvavr\inc\stdio.h
 F6=E:\cvavr\inc\io.h
 F7=E:\cvavr\inc\stdarg.h
 F8=trs_function.h
-[FoldedCode3]
-Line1=14
-Line2=21
-Line3=35
-Line4=49
-Line5=67
-Line6=72
-Line7=78
-Blocks=7
-[FoldedCode6]
+[Bookmarks10]
+TimeStamp=1528394565
+Row=97
+Column=84
+ScrollPosX=0
+ScrollPosY=63
+BK0=-1
+BK1=-1
+BK2=-1
+BK3=-1
+BK4=-1
+BK5=-1
+BK6=-1
+BK7=-1
+BK8=-1
+BK9=-1
+[FoldedCode10]
+Blocks=0
+[Bookmarks11]
+TimeStamp=1528397030
+Row=113
+Column=31
+ScrollPosX=0
+ScrollPosY=77
+BK0=-1
+BK1=-1
+BK2=-1
+BK3=-1
+BK4=-1
+BK5=-1
+BK6=-1
+BK7=-1
+BK8=-1
+BK9=-1
+[FoldedCode11]
 Blocks=0
 [FoldedCode2]
 Blocks=0
 [FoldedCode9]
 Blocks=0
-[FoldedCode7]
+[Bookmarks12]
+TimeStamp=1528203657
+Row=0
+Column=0
+ScrollPosX=0
+ScrollPosY=0
+BK0=-1
+BK1=-1
+BK2=-1
+BK3=-1
+BK4=-1
+BK5=-1
+BK6=-1
+BK7=-1
+BK8=-1
+BK9=-1
+[FoldedCode12]
 Blocks=0
