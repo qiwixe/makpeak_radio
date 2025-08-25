@@ -1,4 +1,4 @@
-VERSION:3 SOURCE_TIMESTAMP:5B168CA0
+VERSION:3 SOURCE_TIMESTAMP:5B1882B7
 NODE:I LEVEL:0 LINE:1 "E:\cvavr\inc\mega8.h"
 NODE:I LEVEL:0 LINE:2 "E:\cvavr\inc\delay.h"
 NODE:I LEVEL:0 LINE:3 "E:\cvavr\inc\string.h"
@@ -11,5 +11,5 @@ NODE:V LEVEL:0 LINE:9 "MESSAGE_BUFFER -> RAM:????"
 NODE:V LEVEL:0 LINE:10 "RFID_index -> R5"
 NODE:V LEVEL:0 LINE:11 "timer -> R6,R7"
 NODE:F LEVEL:0 LINE:15 "ext_int1_isr(void)"
-NODE:F LEVEL:0 LINE:21 "timer1_ovf_isr(void)"
-NODE:F LEVEL:0 LINE:29 "main(void)"
+NODE:F LEVEL:0 LINE:22 "timer1_ovf_isr(void)"
+NODE:F LEVEL:0 LINE:31 "main(void)"
