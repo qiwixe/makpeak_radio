@@ -3,33 +3,42 @@
 #include <string.h>
 #include <stdio.h>
 #include "trs_function.h"
-#define RFID_PACKET_LENGTH 14
+#define RFID_PACKET_LENGTH 14        
+
+//Пины микросхемы
+#define LED_Reader PORTD.6      //Светодиод ридера (PD6)
+#define POWER_Reader PORTB.2    //Питание ридера !ИНВЕРТИРОВАНО! (PB2)
+#define POWER_Radio PORTB.0     //Питание радио модуля !ИНВЕРТИРОВАНО! (PB0)
+
+//Глобальные переменные
 char RAM_RFID_buffer[RFID_PACKET_LENGTH];
 char RFID_buffer[RFID_PACKET_LENGTH];
 char MESSAGE_BUFFER[18];
 unsigned char RFID_index = 0;
 unsigned int timer = 0;
+    
 
 //Обработчик прерывания от геркона (PD3)
 interrupt [EXT_INT1] void ext_int1_isr(void)
 {
-    PORTB.2 = 1;     //Включаем PB2
-    PORTD.6 = 1;     //Включаем светодиод ридера (PB6)
-    timer = 0;       //Обнуляем счётчик
+    POWER_Reader = 0;       //Включаем ридер !ИНВЕРТИРОВАНО! (PB2)
+    LED_Reader = 1;         //Включаем светодиод ридера (PD6)
+    timer = 0;              //Обнуляем счётчик
 }
-//Обработчик прерывания от геркона Timer1
+//Обработчик прерывания от Timer1
 interrupt [TIM1_OVF] void timer1_ovf_isr(void)
 {
     timer++;
-    if (timer >= 7) {  //1 это примено 8.5 сек
-        PORTB.2 = 0;   //Выключаем PB2
-        PORTD.6 = 0;   //Выключаем светодиод ридера (PB6)     
-        timer = 0;     //Сброс счетчика 
+    if (timer >= 7) {           //1 это примено 8.5 сек
+        POWER_Reader = 1;       //Выключаем ридер !ИНВЕРТИРОВАНО! (PB2)
+        LED_Reader = 0;         //Выключаем светодиод ридера (PD6)     
+        timer = 0;              //Сброс счетчика 
     }
 }
 void main(void){
 char ch;
-char msg[18];
+char msg[18]; 
+//Номер передатчика
 char number_trs[] = "33";
 //UART
 {
@@ -98,12 +107,12 @@ while (1) {
                 if (memcmp(RAM_RFID_buffer, RFID_buffer, RFID_PACKET_LENGTH) != 0){         //Метка отличается от предыдущей
                 memcpy(RAM_RFID_buffer, RFID_buffer, RFID_PACKET_LENGTH);                   //Запоминаем метку
                 sprintf(msg, "=%s+%s+%d*", number_trs, get_tag(RFID_buffer), adc1_read());  //Формирование строки =НОМЕР+МЕТКА+ЗАРЯД*
-                build_message(msg, MESSAGE_BUFFER);                                         //Расчет контрольной суммы и формирование строки !СУММА=СТОЛ+МЕТКА+ЗАРЯД*
-                PORTB.0 = 1;                                                                //Вкл радиомодуль (PB0)
+                build_message(msg, MESSAGE_BUFFER);                                         //Расчет контрольной суммы и формирование строки !СУММА=НОМЕР+МЕТКА+ЗАРЯД*
+                POWER_Radio = 0;                                                            //Включение радио модуля !ИНВЕРТИРОВАНО! (PB0)
                 uart_send_times(MESSAGE_BUFFER,5);                                          //Отправка сообщения 5 раз
-                PORTB.0 = 0;                                                                //Выкл радиомодуль (PB0)
-                PORTB.2 = 0;                                                                //Выключаем ридер (PB2)
-                PORTD.6 = 0;                                                                //Выключаем светодиод (PD2)
+                POWER_Radio = 1;                                                            //Выключение радио модуля !ИНВЕРТИРОВАНО! (PB0)
+                POWER_Reader = 1;                                                           //Выключаем ридер !ИНВЕРТИРОВАНО! (PB2)
+                LED_Reader = 0;                                                             //Выключаем светодиод ридера (PD6)
             }
             }
         }  

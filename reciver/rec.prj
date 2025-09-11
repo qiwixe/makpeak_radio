@@ -20,18 +20,18 @@ OutputExecutableFilesDirectory=Release\Exe
 OutputLinkerFilesDirectory=Release\Link
 AllowDisplayFunctionCallTree=0
 CleanUp=2
-TimeStamp1=1527216553
+TimeStamp1=1529572692
 OF2=rec_function.h
-TimeStamp2=1527214960
+TimeStamp2=1529572692
 TimeStamp0=1526950028
 F1=rec.c
 F2=rec_function.c
 OF3=rec_function.c
-TimeStamp3=1527214960
+TimeStamp3=1529572692
 OF4=..\trnsm\trs_function.c
-TimeStamp4=1528077125
+TimeStamp4=1529572692
 OF5=..\trnsm\trs_function.h
-TimeStamp5=1528076787
+TimeStamp5=1529572692
 [CompilerDebug]
 Chip=ATmega8
 CPUClock=8000000
@@ -136,8 +136,8 @@ UseEEPROMLocation0=1
 DisplayCodeSizeError=1
 RebuildAll=0
 LinkageInformationPresent=1
-COFFileTimeStamp=1528398053
-Build=92
+COFFileTimeStamp=1529572885
+Build=93
 GlobalVarAddr=388
 EEPROMVarAddr=0
 [DefinedSymbolsDebug]
@@ -247,7 +247,7 @@ DisplayCodeSizeError=1
 RebuildAll=1
 LinkageInformationPresent=0
 COFFileTimeStamp=-1
-Build=92
+Build=93
 IncludePath0=E:\cvavr\inc
 IncludePath1=
 IncludePath2=
@@ -495,7 +495,7 @@ Row=0
 Column=0
 ScrollPosX=0
 ScrollPosY=0
-TimeStamp=1528079754
+TimeStamp=1529572910
 [BookmarksFoldedCode]
 Files=7
 F1=C:\Users\qiwix\OneDrive\Desktop\reciver\rec.c
@@ -540,7 +540,7 @@ L13=Enhanced function parameters passing: Mode 2
 L14=Automatic register allocation: Yes
 L15=Smart register allocation: Yes
 L16=
-L17=Build: 92
+L17=Build: 93
 L18=11341 line(s) compiled
 L19=No errors
 L20=4 warning(s)
@@ -578,11 +578,11 @@ L10=[.dseg] 0x000060 0x000184      0     36     36    1024   3.5%
 L11=[.eseg] 0x000000 0x000000      0      0      0     512   0.0%
 L12=
 [Bookmarks2]
-TimeStamp=1527216553
-Row=11
-Column=0
+TimeStamp=1529572692
+Row=13
+Column=101
 ScrollPosX=0
-ScrollPosY=9
+ScrollPosY=0
 BK0=-1
 BK1=-1
 BK2=-1
@@ -619,11 +619,11 @@ HIDKeyboard=0
 HIDMouse=0
 HIDJoystick=0
 [Bookmarks4]
-TimeStamp=1527214960
-Row=96
-Column=1
+TimeStamp=1529572692
+Row=0
+Column=0
 ScrollPosX=0
-ScrollPosY=50
+ScrollPosY=0
 BK0=-1
 BK1=-1
 BK2=-1
@@ -635,7 +635,7 @@ BK7=-1
 BK8=-1
 BK9=-1
 [Bookmarks5]
-TimeStamp=1528076787
+TimeStamp=1529572692
 Row=0
 Column=0
 ScrollPosX=0
@@ -651,7 +651,7 @@ BK7=-1
 BK8=-1
 BK9=-1
 [Bookmarks6]
-TimeStamp=1528077125
+TimeStamp=1529572692
 Row=0
 Column=0
 ScrollPosX=0
@@ -667,9 +667,9 @@ BK7=-1
 BK8=-1
 BK9=-1
 [Bookmarks7]
-TimeStamp=1527214960
-Row=10
-Column=60
+TimeStamp=1529572692
+Row=0
+Column=0
 ScrollPosX=0
 ScrollPosY=0
 BK0=-1
@@ -682,16 +682,6 @@ BK6=-1
 BK7=-1
 BK8=-1
 BK9=-1
-[FoldedCode2]
-Blocks=0
-[FoldedCode4]
-Blocks=0
-[FoldedCode5]
-Blocks=0
-[FoldedCode6]
-Blocks=0
-[FoldedCode7]
-Blocks=0
 [HeadersList]
 Files=2
 F1=C:\Users\qiwix\OneDrive\Desktop\makpeak_radio\reciver\rec.c
@@ -716,3 +706,13 @@ F5=E:\cvavr\inc\stdio.h
 F6=E:\cvavr\inc\io.h
 F7=E:\cvavr\inc\stdarg.h
 F8=rec_function.h
+[FoldedCode2]
+Blocks=0
+[FoldedCode4]
+Blocks=0
+[FoldedCode5]
+Blocks=0
+[FoldedCode6]
+Blocks=0
+[FoldedCode7]
+Blocks=0

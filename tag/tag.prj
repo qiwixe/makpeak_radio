@@ -21,9 +21,9 @@ OutputExecutableFilesDirectory=Release\Exe
 OutputLinkerFilesDirectory=Release\Link
 AllowDisplayFunctionCallTree=0
 CleanUp=2
-TimeStamp1=1528081820
+TimeStamp1=1529572692
 OF2=..\reciver\rec.c
-TimeStamp2=1527216553
+TimeStamp2=1529572692
 [CompilerDebug]
 Chip=ATmega8
 CPUClock=8000000
@@ -128,8 +128,8 @@ UseEEPROMLocation0=1
 DisplayCodeSizeError=1
 RebuildAll=0
 LinkageInformationPresent=1
-COFFileTimeStamp=1528081821
-Build=38
+COFFileTimeStamp=1529572876
+Build=39
 GlobalVarAddr=352
 EEPROMVarAddr=0
 [DefinedSymbolsDebug]
@@ -239,7 +239,7 @@ DisplayCodeSizeError=1
 RebuildAll=1
 LinkageInformationPresent=0
 COFFileTimeStamp=-1
-Build=38
+Build=39
 [DefinedSymbols]
 Count=0
 [CompilerAdvanced]
@@ -355,7 +355,7 @@ L13=Enhanced function parameters passing: Mode 2
 L14=Automatic register allocation: Yes
 L15=Smart register allocation: Yes
 L16=
-L17=Build: 38
+L17=Build: 39
 L18=9773 line(s) compiled
 L19=No errors
 L20=1 warning(s)
@@ -396,7 +396,7 @@ Row=0
 Column=0
 ScrollPosX=0
 ScrollPosY=0
-TimeStamp=1528081861
+TimeStamp=1529572882
 [BookmarksFoldedCode]
 Files=3
 F1=C:\Users\qiwix\OneDrive\Desktop\tag\tag.c
@@ -421,11 +421,11 @@ BK9=-1
 [FoldedCode1]
 Blocks=0
 [Bookmarks2]
-TimeStamp=1528081820
-Row=121
-Column=17
+TimeStamp=1529572692
+Row=0
+Column=0
 ScrollPosX=0
-ScrollPosY=99
+ScrollPosY=0
 BK0=-1
 BK1=-1
 BK2=-1
@@ -437,7 +437,7 @@ BK7=-1
 BK8=-1
 BK9=-1
 [Bookmarks3]
-TimeStamp=1527216553
+TimeStamp=1529572692
 Row=0
 Column=0
 ScrollPosX=0
