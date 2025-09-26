@@ -3,7 +3,8 @@
 #include <string.h>
 #include <stdio.h>
 #include "trs_function.h"
-#define RFID_PACKET_LENGTH 14        
+#define RFID_PACKET_LENGTH 14
+#define DEBOUNCE_MS 1000        
 
 //Пины микросхемы
 #define LED_Reader PORTD.6      //Светодиод ридера (PD6)
@@ -16,14 +17,12 @@ char RFID_buffer[RFID_PACKET_LENGTH];
 char MESSAGE_BUFFER[18];
 unsigned char RFID_index = 0;
 unsigned int timer = 0;
-    
+unsigned int ms_counter = 0;
 
 //Обработчик прерывания от геркона (PD3)
 interrupt [EXT_INT1] void ext_int1_isr(void)
 {
-    POWER_Reader = 0;       //Включаем ридер !ИНВЕРТИРОВАНО! (PB2)
-    LED_Reader = 1;         //Включаем светодиод ридера (PD6)
-    timer = 0;              //Обнуляем счётчик
+    ms_counter = 0; //Сброс таймера дребезга
 }
 //Обработчик прерывания от Timer1
 interrupt [TIM1_OVF] void timer1_ovf_isr(void)
@@ -33,6 +32,20 @@ interrupt [TIM1_OVF] void timer1_ovf_isr(void)
         POWER_Reader = 1;       //Выключаем ридер !ИНВЕРТИРОВАНО! (PB2)
         LED_Reader = 0;         //Выключаем светодиод ридера (PD6)     
         timer = 0;              //Сброс счетчика 
+    }
+}
+//таймер2
+interrupt [TIM2_COMP] void timer2_compare_isr(void)
+{
+    if (PIND.3 == 0)
+    {   
+        ms_counter++;          //Таймер дребезга
+    } 
+    if (ms_counter == DEBOUNCE_MS)    //Если пин в пололжении по времени > времени дребезга
+    {
+        POWER_Reader = 0;       //Включаем ридер !ИНВЕРТИРОВАНО! (PB2)
+        LED_Reader = 1;         //Включаем светодиод ридера (PD6)
+        timer = 0;              //Обнуляем счётчик
     }
 }
 void main(void){
@@ -82,6 +95,12 @@ UBRRL=0x33;
     TCCR1A = 0x00;
     TCCR1B = (1<<CS12) | (0<<CS11) | (1<<CS10);
     TIMSK |= (1<<TOIE1);
+}
+// Настройка таймера защиты от дребезга
+{
+    TCCR2 = (1<<WGM21) | (1<<CS01) | (1<<CS00);
+    OCR2 = 124;          // при 8 МГц даёт 1 мс
+    TIMSK |= (1<<OCIE2); // Разрешить прерывание по совпадению
 }
 //Радиомодуль
 {
