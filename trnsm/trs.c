@@ -2,6 +2,7 @@
 #include <delay.h>
 #include <string.h>
 #include <stdio.h>
+#include <sleep.h>
 #include "trs_function.h"
 #define RFID_PACKET_LENGTH 14
 #define DEBOUNCE_MS 1000        
@@ -24,24 +25,24 @@ interrupt [EXT_INT1] void ext_int1_isr(void)
 {
     ms_counter = 0; //Сброс таймера дребезга
 }
-//Обработчик прерывания от Timer1
+//Обработчик прерывания от Timer1 (отключение после минуты без считывания карты)
 interrupt [TIM1_OVF] void timer1_ovf_isr(void)
 {
     timer++;
-    if (timer >= 7) {           //1 это примено 8.5 сек
+    if (timer >= 7) {           //1 это примено 8.5 сек (7 это 60.2 сек)
         POWER_Reader = 1;       //Выключаем ридер !ИНВЕРТИРОВАНО! (PB2)
         LED_Reader = 0;         //Выключаем светодиод ридера (PD6)     
         timer = 0;              //Сброс счетчика 
     }
 }
-//таймер2
+//Обработчик включения ридера по геркону
 interrupt [TIM2_COMP] void timer2_compare_isr(void)
 {
     if (PIND.3 == 0)
     {   
         ms_counter++;          //Таймер дребезга
     } 
-    if (ms_counter == DEBOUNCE_MS)    //Если пин в пололжении по времени > времени дребезга
+    if (ms_counter == DEBOUNCE_MS)    //Если пин в одном положении по времени > времени дребезга
     {
         POWER_Reader = 0;       //Включаем ридер !ИНВЕРТИРОВАНО! (PB2)
         LED_Reader = 1;         //Включаем светодиод ридера (PD6)
@@ -85,18 +86,18 @@ UBRRL=0x33;
     MCUCR |= (1<<ISC11); // прерывание по спаду
     GICR  |= (1<<INT1);
 }    
-// Настройка ADC1
+//Настройка ADC1
 {
     ADMUX = (1<<REFS0) | (1<<MUX0);  // AVCC, ADC1
     ADCSRA = (1<<ADEN) | (1<<ADPS2)|(1<<ADPS1)|(1<<ADPS0); // делитель 128
 }
-// Настройка таймера
+//Настройка таймера
 {
     TCCR1A = 0x00;
     TCCR1B = (1<<CS12) | (0<<CS11) | (1<<CS10);
     TIMSK |= (1<<TOIE1);
 }
-// Настройка таймера защиты от дребезга
+//Настройка таймера защиты от дребезга
 {
     TCCR2 = (1<<WGM21) | (1<<CS01) | (1<<CS00);
     OCR2 = 124;          // при 8 МГц даёт 1 мс
@@ -107,7 +108,10 @@ UBRRL=0x33;
   //PB0 как выход
     DDRB |= (1<<0);
 }
-
+//Настройка сна (Power-down)
+{
+MCUCR = (1<<SE) | (1<<SM1);
+}
 #asm("sei") // глобально разрешаем прерывания    
 while (1) {
         ch = uart_receive();
@@ -131,7 +135,8 @@ while (1) {
                 uart_send_times(MESSAGE_BUFFER,5);                                          //Отправка сообщения 5 раз
                 POWER_Radio = 1;                                                            //Выключение радио модуля !ИНВЕРТИРОВАНО! (PB0)
                 POWER_Reader = 1;                                                           //Выключаем ридер !ИНВЕРТИРОВАНО! (PB2)
-                LED_Reader = 0;                                                             //Выключаем светодиод ридера (PD6)
+                LED_Reader = 0;                                                             //Выключаем светодиод ридера (PD6)         
+                #asm("sleep")                                                               //Уходим в сон, проснемся по прерыванию от геркона
             }
             }
         }  

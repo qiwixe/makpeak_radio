@@ -25,7 +25,7 @@ OF2=trs_function.h
 TimeStamp2=1529572692
 TimeStamp0=1527164177
 OF3=trs.c
-TimeStamp3=1530573186
+TimeStamp3=1530573334
 F1=trs.c
 F2=trs_function.c
 OF4=..\reciver\rec_function.c
@@ -140,8 +140,8 @@ UseEEPROMLocation0=1
 DisplayCodeSizeError=1
 RebuildAll=0
 LinkageInformationPresent=1
-COFFileTimeStamp=1530573188
-Build=262
+COFFileTimeStamp=1530753708
+Build=266
 GlobalVarAddr=418
 EEPROMVarAddr=0
 [DefinedSymbolsDebug]
@@ -251,7 +251,7 @@ DisplayCodeSizeError=1
 RebuildAll=1
 LinkageInformationPresent=0
 COFFileTimeStamp=-1
-Build=262
+Build=266
 IncludePath0=E:\cvavr\inc
 IncludePath1=
 IncludePath2=
@@ -511,8 +511,8 @@ L13=Enhanced function parameters passing: Mode 2
 L14=Automatic register allocation: Yes
 L15=Smart register allocation: Yes
 L16=
-L17=Build: 262
-L18=14009 line(s) compiled
+L17=Build: 266
+L18=16150 line(s) compiled
 L19=No errors
 L20=2 warning(s)
 L21=
@@ -532,7 +532,7 @@ L34=Heap size: 0 byte(s)
 L35=
 Lines=38
 L36=EEPROM usage: 0 byte(s), 0,0% of EEPROM
-L37=Program size: 2545 words (5090 bytes), 62,1% of FLASH
+L37=Program size: 2549 words (5098 bytes), 62,2% of FLASH
 L38=361 words (722 bytes), 12,4% reduced by Code Compression
 L39=0 words (0 bytes), 0,0% reduced by Code Compression
 [BuildInfoAssembler]
@@ -540,12 +540,12 @@ Lines=12
 L1=AVRASM: AVR macro assembler 2.1.30 (build 592 Nov  7 2008 12:38:17)
 L2=Copyright (C) 1995-2008 ATMEL Corporation
 L3=
-L4=C:\Users\qiwix\OneDrive\Desktop\makpeak_radio\trnsm\Debug\List\trs.asm(4506): No EEPROM data, deleting C:\Users\qiwix\OneDrive\Desktop\makpeak_radio\trnsm\Debug\Exe\trs.eep
+L4=C:\Users\qiwix\OneDrive\Desktop\makpeak_radio\trnsm\Debug\List\trs.asm(4527): No EEPROM data, deleting C:\Users\qiwix\OneDrive\Desktop\makpeak_radio\trnsm\Debug\Exe\trs.eep
 L5=
 L6=ATmega8 memory use summary [bytes]:
 L7=Segment   Begin    End      Code   Data   Used    Size   Use%
 L8=---------------------------------------------------------------
-L9=[.cseg] 0x000000 0x0013e2   5032     58   5090    8192  62.1%
+L9=[.cseg] 0x000000 0x0013ea   5040     58   5098    8192  62.2%
 L10=[.dseg] 0x000060 0x0001a2      0     66     66    1024   6.4%
 L11=[.eseg] 0x000000 0x000000      0      0      0     512   0.0%
 L12=
@@ -554,7 +554,7 @@ Row=0
 Column=0
 ScrollPosX=0
 ScrollPosY=0
-TimeStamp=1530573206
+TimeStamp=1530573841
 [BookmarksFoldedCode]
 Files=12
 F1=C:\Users\qiwix\OneDrive\Desktop\trnsm\trs.c
@@ -604,11 +604,11 @@ BK7=-1
 BK8=-1
 BK9=-1
 [Bookmarks3]
-TimeStamp=1530573186
-Row=21
-Column=60
+TimeStamp=1530573334
+Row=44
+Column=76
 ScrollPosX=0
-ScrollPosY=9
+ScrollPosY=15
 BK0=-1
 BK1=-1
 BK2=-1
@@ -786,12 +786,23 @@ Blocks=0
 Blocks=0
 [FoldedCode9]
 Blocks=0
+[FoldedCode3]
+Line1=57
+Line2=71
+Line3=89
+Line4=94
+Line5=100
+Blocks=5
+[FoldedCode6]
+Blocks=0
+[FoldedCode7]
+Blocks=0
 [HeadersList]
 Files=2
 F1=C:\Users\qiwix\OneDrive\Desktop\makpeak_radio\trnsm\trs.c
 F2=C:\Users\qiwix\OneDrive\Desktop\makpeak_radio\trnsm\trs_function.c
 [Header1]
-Files=8
+Files=9
 F1=E:\cvavr\inc\mega8.h
 F2=E:\cvavr\inc\mega8_bits.h
 F3=E:\cvavr\inc\delay.h
@@ -799,7 +810,8 @@ F4=E:\cvavr\inc\string.h
 F5=E:\cvavr\inc\stdio.h
 F6=E:\cvavr\inc\io.h
 F7=E:\cvavr\inc\stdarg.h
-F8=trs_function.h
+F8=E:\cvavr\inc\sleep.h
+F9=trs_function.h
 [Header2]
 Files=8
 F1=E:\cvavr\inc\mega8.h
@@ -810,11 +822,3 @@ F5=E:\cvavr\inc\stdio.h
 F6=E:\cvavr\inc\io.h
 F7=E:\cvavr\inc\stdarg.h
 F8=trs_function.h
-[FoldedCode3]
-Line1=57
-Line2=89
-Blocks=2
-[FoldedCode6]
-Blocks=0
-[FoldedCode7]
-Blocks=0
