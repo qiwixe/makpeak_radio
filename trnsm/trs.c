@@ -8,9 +8,9 @@
 #define DEBOUNCE_MS 1000        
 
 //Пины микросхемы
-#define LED_Reader PORTD.6      //Светодиод ридера (PD6)
-#define POWER_Reader PORTB.2    //Питание ридера !ИНВЕРТИРОВАНО! (PB2)
-#define POWER_Radio PORTB.0     //Питание радио модуля !ИНВЕРТИРОВАНО! (PB0)
+#define LED_Reader PORTD.7      //Светодиод ридера (PD7)
+#define POWER_Reader PORTD.4    //Питание ридера !ИНВЕРТИРОВАНО! (PD4)
+#define POWER_Radio PORTB.2     //Питание радио модуля !ИНВЕРТИРОВАНО! (PB2)
 
 //Глобальные переменные
 char RAM_RFID_buffer[RFID_PACKET_LENGTH];
@@ -85,7 +85,7 @@ UBRRL=0x33;
     //Настройка INT1
     MCUCR |= (1<<ISC11); // прерывание по спаду
     GICR  |= (1<<INT1);
-}    
+}  
 //Настройка ADC1
 {
     ADMUX = (1<<REFS0) | (1<<MUX0);  // AVCC, ADC1
