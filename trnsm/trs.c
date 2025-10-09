@@ -1,3 +1,4 @@
+flash unsigned char zagolovok[]={"Transmitter v0.1.11"};  //  ВЕРСИЯ прошивки
 #include <mega8.h>
 #include <delay.h>
 #include <string.h>
@@ -71,7 +72,7 @@
 
 //Глобальные переменные
 #define RFID_PACKET_LENGTH 14               //Длина приходящего пакета
-#define DEBOUNCE_MS 1000                    //Время обработки дребезга 
+#define DEBOUNCE_MS 100                    //Время обработки дребезга 
 char RAM_RFID_buffer[RFID_PACKET_LENGTH];   //Буфер для запоминания метки
 char RFID_buffer[RFID_PACKET_LENGTH];       //Буфер для приходящего сообщения
 char MESSAGE_BUFFER[18];                    //Буфер для сообщения !СУММА=НОМЕР+МЕТКА+ЗАРЯД*
@@ -88,8 +89,8 @@ interrupt [TIM1_OVF] void timer1_ovf_isr(void){
     timer++;                            //счетчик времени
     //отключение после минуты без считывания карты
     if (timer >= 7) {                   //1 это примено 8.5 сек (7 это 60.2 сек)
-        POWER_Reader = 1;               //Выключаем ридер !!ИНВЕРТИРОВАНО!! (PB2)
-        LED_Reader = 0;                 //Выключаем светодиод ридера (PD6)     
+        POWER_Reader = 1;               //Выключаем ридер !!ИНВЕРТИРОВАНО!!
+        LED_Reader = 0;                 //Выключаем светодиод ридера   
         timer = 0;                      //Сброс счетчика 
         #asm("sleep")                   //Уход в сон
     }
@@ -99,9 +100,9 @@ interrupt [TIM2_COMP] void timer2_compare_isr(void){
     if (Reed_switch == 0){              //Если геркон включен   
         ms_counter++;                   //Таймер дребезга
     } 
-    if (ms_counter == DEBOUNCE_MS){     //Если пин в одном положении по времени > времени дребезга
-        POWER_Reader = 0;               //Включаем ридер !!ИНВЕРТИРОВАНО!! (PB2)
-        LED_Reader = 1;                 //Включаем светодиод ридера (PD6)
+    if (ms_counter > DEBOUNCE_MS){      //Если пин в одном положении по времени > времени дребезга
+        POWER_Reader = 0;               //Включаем ридер !!ИНВЕРТИРОВАНО!!
+        LED_Reader = 1;                 //Включаем светодиод ридера
         timer = 0;                      //Обнуляем счётчик
     }
 }
@@ -126,13 +127,13 @@ char number_trs[] = "33";               //Номер передатчика
 //Геркон
 {    
     POWER_Radio_DDR = 1;                // Пин питания радиомодуля как выход
-    POWER_Radio = 0;                    // изначально выключен !!ИНВЕРТИРОВАНО!!
+    POWER_Radio = 1;                    // изначально выключен !!ИНВЕРТИРОВАНО!!
 
     POWER_Reader_DDR = 1;               // Пин питания ридера как выход
-    POWER_Reader = 0;                   // изначально выключен !!ИНВЕРТИРОВАНО!!
+    POWER_Reader = 1;                   // изначально выключен !!ИНВЕРТИРОВАНО!!
         
     LED_Reader_DDR = 1;                 // Пин питания светодиода ридера как выход
-    LED_Reader = 1;                     // изначально выключен
+    LED_Reader = 0;                     // изначально выключен
     
     Reed_switch_DDR = 0;                // Пин геркона как вход
     Reed_switch_PORT = 1;               // подтяжка
@@ -165,7 +166,6 @@ char number_trs[] = "33";               //Номер передатчика
 #asm("sei") // глобально разрешаем прерывания    
 while (1) {
         ch = uart_receive();
-        
         if (ch == 0x02) {                                                                   // Проверка старт байт
             RFID_index = 0;                                                                 // установки индекса на 1 символ
             RFID_buffer[RFID_index++] = ch;                                                 // записывание этого символа
