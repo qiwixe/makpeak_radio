@@ -10,7 +10,7 @@ Files=1
 F1=tag.c
 OpenedFiles=2
 OF1=tag.c
-ActiveTab=2
+ActiveTab=1
 DebugOutputListFilesDirectory=Debug\List
 DebugOutputObjectFilesDirectory=Debug
 DebugOutputExecutableFilesDirectory=Debug\Exe
@@ -21,7 +21,7 @@ OutputExecutableFilesDirectory=Release\Exe
 OutputLinkerFilesDirectory=Release\Link
 AllowDisplayFunctionCallTree=0
 CleanUp=2
-TimeStamp1=1530572838
+TimeStamp1=1531737605
 OF2=..\reciver\rec.c
 TimeStamp2=1529572692
 [CompilerDebug]
@@ -128,8 +128,8 @@ UseEEPROMLocation0=1
 DisplayCodeSizeError=1
 RebuildAll=0
 LinkageInformationPresent=1
-COFFileTimeStamp=1530572839
-Build=41
+COFFileTimeStamp=1531749339
+Build=44
 GlobalVarAddr=352
 EEPROMVarAddr=0
 [DefinedSymbolsDebug]
@@ -239,7 +239,7 @@ DisplayCodeSizeError=1
 RebuildAll=1
 LinkageInformationPresent=0
 COFFileTimeStamp=-1
-Build=41
+Build=44
 [DefinedSymbols]
 Count=0
 [CompilerAdvanced]
@@ -355,10 +355,10 @@ L13=Enhanced function parameters passing: Mode 2
 L14=Automatic register allocation: Yes
 L15=Smart register allocation: Yes
 L16=
-L17=Build: 41
+L17=Build: 44
 L18=9773 line(s) compiled
 L19=No errors
-L20=1 warning(s)
+L20=4 warning(s)
 L21=
 L22=Bit variables size: 0 byte(s)
 L23=
@@ -375,19 +375,19 @@ L33=Heap size: 0 byte(s)
 L34=
 L35=EEPROM usage: 0 byte(s), 0,0% of EEPROM
 Lines=37
-L36=Program size: 323 words (646 bytes), 7,9% of FLASH
-L37=14 words (28 bytes), 4,2% reduced by Code Compression
+L36=Program size: 314 words (628 bytes), 7,7% of FLASH
+L37=7 words (14 bytes), 2,2% reduced by Code Compression
 [BuildInfoAssembler]
 Lines=12
 L1=AVRASM: AVR macro assembler 2.1.30 (build 592 Nov  7 2008 12:38:17)
 L2=Copyright (C) 1995-2008 ATMEL Corporation
 L3=
-L4=C:\Users\qiwix\OneDrive\Desktop\makpeak_radio\tag\Debug\List\tag.asm(1634): No EEPROM data, deleting C:\Users\qiwix\OneDrive\Desktop\makpeak_radio\tag\Debug\Exe\tag.eep
+L4=C:\Users\qiwix\OneDrive\Desktop\makpeak_radio\tag\Debug\List\tag.asm(1622): No EEPROM data, deleting C:\Users\qiwix\OneDrive\Desktop\makpeak_radio\tag\Debug\Exe\tag.eep
 L5=
 L6=ATmega8 memory use summary [bytes]:
 L7=Segment   Begin    End      Code   Data   Used    Size   Use%
 L8=---------------------------------------------------------------
-L9=[.cseg] 0x000000 0x000286    566     80    646    8192   7.9%
+L9=[.cseg] 0x000000 0x000274    548     80    628    8192   7.7%
 L10=[.dseg] 0x000060 0x000160      0      0      0    1024   0.0%
 L11=[.eseg] 0x000000 0x000000      0      0      0     512   0.0%
 L12=
@@ -396,7 +396,7 @@ Row=0
 Column=0
 ScrollPosX=0
 ScrollPosY=0
-TimeStamp=1530572861
+TimeStamp=1531737616
 [BookmarksFoldedCode]
 Files=3
 F1=C:\Users\qiwix\OneDrive\Desktop\tag\tag.c
@@ -421,11 +421,11 @@ BK9=-1
 [FoldedCode1]
 Blocks=0
 [Bookmarks2]
-TimeStamp=1530572838
+TimeStamp=1531737605
 Row=127
-Column=23
+Column=25
 ScrollPosX=0
-ScrollPosY=101
+ScrollPosY=55
 BK0=-1
 BK1=-1
 BK2=-1
@@ -441,7 +441,7 @@ TimeStamp=1529572692
 Row=0
 Column=0
 ScrollPosX=0
-ScrollPosY=14
+ScrollPosY=32
 BK0=-1
 BK1=-1
 BK2=-1
@@ -452,6 +452,10 @@ BK6=-1
 BK7=-1
 BK8=-1
 BK9=-1
+[FoldedCode2]
+Blocks=0
+[FoldedCode3]
+Blocks=0
 [HeadersList]
 Files=1
 F1=C:\Users\qiwix\OneDrive\Desktop\makpeak_radio\tag\tag.c
@@ -463,7 +467,3 @@ F3=E:\cvavr\inc\delay.h
 F4=E:\cvavr\inc\stdio.h
 F5=E:\cvavr\inc\io.h
 F6=E:\cvavr\inc\stdarg.h
-[FoldedCode2]
-Blocks=0
-[FoldedCode3]
-Blocks=0

@@ -495,7 +495,7 @@ Row=0
 Column=0
 ScrollPosX=0
 ScrollPosY=0
-TimeStamp=1529572910
+TimeStamp=1531737593
 [BookmarksFoldedCode]
 Files=7
 F1=C:\Users\qiwix\OneDrive\Desktop\reciver\rec.c
@@ -579,10 +579,10 @@ L11=[.eseg] 0x000000 0x000000      0      0      0     512   0.0%
 L12=
 [Bookmarks2]
 TimeStamp=1529572692
-Row=13
-Column=101
+Row=53
+Column=74
 ScrollPosX=0
-ScrollPosY=0
+ScrollPosY=45
 BK0=-1
 BK1=-1
 BK2=-1
