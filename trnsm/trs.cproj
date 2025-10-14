@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>7.0</ProjectVersion>
     <ToolchainName>com.HPInfoTech.CodeVisionAVR.C</ToolchainName>
-    <ProjectGuid>{48B7A876-423D-497C-A76A-A46C3F34E8A0}</ProjectGuid>
+    <ProjectGuid>{A9B5EFBE-423D-497C-A76A-A46C3F34E8A0}</ProjectGuid>
     <avrdevice>ATmega8</avrdevice>
     <avrdeviceseries>none</avrdeviceseries>
     <OutputType>Executable</OutputType>
@@ -42,6 +42,9 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="trs_function.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="trs_settings.c">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>

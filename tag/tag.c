@@ -91,7 +91,7 @@ void main(void)
 const char tagID[] = "2F0039E41F";
 const char tagID1[] = "2F0039E41F";
 const char tagID2[] = "2F0039E41F";
-const char tagID3[] = "2F0139E41F";
+const char tagID3[] = "2F0039E41F";
 unsigned char i;
 // Input/Output Ports initialization
 
@@ -120,11 +120,11 @@ while (1)
         */
         send_rfid_packet(tagID);
         delay_ms(6000);
-       // send_rfid_packet(tagID1);
-       // delay_ms(6000);
-       // send_rfid_packet(tagID2);
-       // delay_ms(6000);
-       // send_rfid_packet(tagID3);
+        send_rfid_packet(tagID1);
+        delay_ms(6000);
+        send_rfid_packet(tagID2);
+        delay_ms(6000);
+        send_rfid_packet(tagID3);
         //delay_ms(6000);
         //while (!(UCSRA & (1 << UDRE)));
         //UDR = 0x55;

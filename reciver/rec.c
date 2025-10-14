@@ -1,3 +1,4 @@
+flash unsigned char zagolovok[] = {"reciver v0.1.1"};  //  ВЕРСИЯ прошивки
 #include <mega8.h>
 #include <delay.h>
 #include <string.h>

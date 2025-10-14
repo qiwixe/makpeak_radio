@@ -9,7 +9,7 @@ D=01.08.2025
 Files=2
 OpenedFiles=5
 OF1=rec.c
-ActiveTab=1
+ActiveTab=5
 DebugOutputListFilesDirectory=Debug\List
 DebugOutputObjectFilesDirectory=Debug
 DebugOutputExecutableFilesDirectory=Debug\Exe
@@ -27,9 +27,9 @@ TimeStamp0=1526950028
 F1=rec.c
 F2=rec_function.c
 OF3=rec_function.c
-TimeStamp3=1529572692
+TimeStamp3=1531869537
 OF4=..\trnsm\trs_function.c
-TimeStamp4=1529572692
+TimeStamp4=1531746077
 OF5=..\trnsm\trs_function.h
 TimeStamp5=1529572692
 [CompilerDebug]
@@ -136,8 +136,8 @@ UseEEPROMLocation0=1
 DisplayCodeSizeError=1
 RebuildAll=0
 LinkageInformationPresent=1
-COFFileTimeStamp=1529572885
-Build=93
+COFFileTimeStamp=1531873807
+Build=98
 GlobalVarAddr=388
 EEPROMVarAddr=0
 [DefinedSymbolsDebug]
@@ -247,7 +247,7 @@ DisplayCodeSizeError=1
 RebuildAll=1
 LinkageInformationPresent=0
 COFFileTimeStamp=-1
-Build=93
+Build=98
 IncludePath0=E:\cvavr\inc
 IncludePath1=
 IncludePath2=
@@ -495,7 +495,7 @@ Row=0
 Column=0
 ScrollPosX=0
 ScrollPosY=0
-TimeStamp=1531737593
+TimeStamp=1531872293
 [BookmarksFoldedCode]
 Files=7
 F1=C:\Users\qiwix\OneDrive\Desktop\reciver\rec.c
@@ -540,10 +540,10 @@ L13=Enhanced function parameters passing: Mode 2
 L14=Automatic register allocation: Yes
 L15=Smart register allocation: Yes
 L16=
-L17=Build: 93
-L18=11341 line(s) compiled
+L17=Build: 98
+L18=11342 line(s) compiled
 L19=No errors
-L20=4 warning(s)
+L20=5 warning(s)
 L21=
 L22=Bit variables size: 0 byte(s)
 L23=
@@ -568,7 +568,7 @@ Lines=12
 L1=AVRASM: AVR macro assembler 2.1.30 (build 592 Nov  7 2008 12:38:17)
 L2=Copyright (C) 1995-2008 ATMEL Corporation
 L3=
-L4=C:\Users\qiwix\OneDrive\Desktop\makpeak_radio\reciver\Debug\List\rec.asm(1833): No EEPROM data, deleting C:\Users\qiwix\OneDrive\Desktop\makpeak_radio\reciver\Debug\Exe\rec.eep
+L4=C:\Users\qiwix\OneDrive\Desktop\makpeak_radio\reciver\Debug\List\rec.asm(1834): No EEPROM data, deleting C:\Users\qiwix\OneDrive\Desktop\makpeak_radio\reciver\Debug\Exe\rec.eep
 L5=
 L6=ATmega8 memory use summary [bytes]:
 L7=Segment   Begin    End      Code   Data   Used    Size   Use%
@@ -582,7 +582,7 @@ TimeStamp=1529572692
 Row=53
 Column=74
 ScrollPosX=0
-ScrollPosY=45
+ScrollPosY=34
 BK0=-1
 BK1=-1
 BK2=-1
@@ -619,11 +619,11 @@ HIDKeyboard=0
 HIDMouse=0
 HIDJoystick=0
 [Bookmarks4]
-TimeStamp=1529572692
-Row=0
-Column=0
+TimeStamp=1531869537
+Row=50
+Column=22
 ScrollPosX=0
-ScrollPosY=0
+ScrollPosY=20
 BK0=-1
 BK1=-1
 BK2=-1
@@ -651,7 +651,7 @@ BK7=-1
 BK8=-1
 BK9=-1
 [Bookmarks6]
-TimeStamp=1529572692
+TimeStamp=1531746077
 Row=0
 Column=0
 ScrollPosX=0
@@ -682,6 +682,16 @@ BK6=-1
 BK7=-1
 BK8=-1
 BK9=-1
+[FoldedCode2]
+Blocks=0
+[FoldedCode4]
+Blocks=0
+[FoldedCode5]
+Blocks=0
+[FoldedCode6]
+Blocks=0
+[FoldedCode7]
+Blocks=0
 [HeadersList]
 Files=2
 F1=C:\Users\qiwix\OneDrive\Desktop\makpeak_radio\reciver\rec.c
@@ -706,13 +716,3 @@ F5=E:\cvavr\inc\stdio.h
 F6=E:\cvavr\inc\io.h
 F7=E:\cvavr\inc\stdarg.h
 F8=rec_function.h
-[FoldedCode2]
-Blocks=0
-[FoldedCode4]
-Blocks=0
-[FoldedCode5]
-Blocks=0
-[FoldedCode6]
-Blocks=0
-[FoldedCode7]
-Blocks=0
