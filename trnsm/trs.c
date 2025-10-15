@@ -37,8 +37,8 @@ void power_mode(char mode) {
             UART_DISABLE();                 // uart отключен  
             TIMER_ENABLE();                 // timer1 работает 
             MS_TIMER_DISABLE();             // timer2 отключен  
-            SLEEP_MODE_IDLE();              // Сон idle
-            SLEEP_ENABLE();                 // Сон включен
+            //SLEEP_MODE_IDLE();              // Сон idle
+            //SLEEP_ENABLE();                 // Сон включен
             break; 
         
         case 3:
@@ -46,8 +46,8 @@ void power_mode(char mode) {
             TIMER_DISABLE();                // timer1 отключен 
             MS_TIMER_DISABLE();             // timer2 отключен  
             ADC1_DISABLE();                 // ADC отключен
-            SLEEP_MODE_POWER_DOWN();        // Сон power-down
-            SLEEP_ENABLE();                 // Сон включен
+            //SLEEP_MODE_POWER_DOWN();        // Сон power-down
+            //SLEEP_ENABLE();                 // Сон включен
             //#asm("sleep");
             break;
     }
@@ -102,7 +102,15 @@ interrupt [TIM1_OVF] void timer1_ovf_isr(void){
 }
 //ms_timer
 interrupt [TIM2_COMP] void timer2_compare_isr(void){
-       
+    /*
+    Сейчас в коде:
+    1)Отключен сон полностью (40:41,49:51 строки)
+    2)Отключена логика забывание карты  (91:94 строки)
+    3)Отключена логика выключения через минуту без карты (ниже логики включения ридера)
+    4)Включены режимы работы (26:54,63,75,83 строки)
+    5)Ниже прописаны 4 версии логики включения ридера, включается он только здесь, отключается при переданном сообщении
+    */
+
     //Обработчик антидребезга геркона  (Изначальный, полная логика)
     if (first_init_reader_flag == 0 && Reed_switch == 0){   //Если геркон замкнут и ридер не включался   
         ms_counter_debounce++;                              //Таймер антидребезга
@@ -112,8 +120,9 @@ interrupt [TIM2_COMP] void timer2_compare_isr(void){
             ms_counter_debounce = 0;                        //Сброс таймера дребезга                                                 
         }
     } 
-    /*
-    //Обработчик антидребезга геркона  (Отключен антидребезг)
+    
+    /*(Отключен антидребезг)
+    //Обработчик антидребезга геркона  
     if (first_init_reader_flag == 0 && Reed_switch == 0){   //Если геркон замкнут и ридер не включался   
         ms_counter_debounce++;                              //Таймер антидребезга
         //if (ms_counter_debounce > DEBOUNCE_MS )
@@ -123,8 +132,10 @@ interrupt [TIM2_COMP] void timer2_compare_isr(void){
             ms_counter_debounce = 0;                        //Сброс таймера дребезга                                                 
         }
     }
+    */
     
-    //Обработчик антидребезга геркона  (Отключен флаг первого вызова)
+    /* (Отключен флаг первого вызова)
+    //Обработчик антидребезга геркона  
     if (Reed_switch == 0){   //Если геркон замкнут и ридер не включался   
         ms_counter_debounce++;                              //Таймер антидребезга
         if (ms_counter_debounce > DEBOUNCE_MS )
@@ -134,8 +145,11 @@ interrupt [TIM2_COMP] void timer2_compare_isr(void){
             ms_counter_debounce = 0;                        //Сброс таймера дребезга                                                 
         }
     }
+    */
     
-        //Обработчик антидребезга геркона  (Отключен флаг первого вызова и антидребезг)
+    /* (Отключен флаг первого вызова и антидребезг)
+        
+        //Обработчик антидребезга геркона  
     if (Reed_switch == 0){   //Если геркон замкнут и ридер не включался   
         ms_counter_debounce++;                              //Таймер антидребезга
         //if (ms_counter_debounce > DEBOUNCE_MS )
@@ -147,8 +161,8 @@ interrupt [TIM2_COMP] void timer2_compare_isr(void){
     }
     */
     
-    
-    /* ОТКЛЮЧЕНА ЛОГИКа ВЫКЛЮЧЕНИЯ ЧЕРЕЗ МИНУТУ (На всякий случай, может быть в ней проблема)
+    /* 
+    ОТКЛЮЧЕНА ЛОГИКА ВЫКЛЮЧЕНИЯ ЧЕРЕЗ МИНУТУ (На всякий случай, может быть в ней проблема)
     //Обработчик ложного срабатывания
     if (RFID_WAITING_fail_flag == 0){                       //Флаг ожидания карты
         ms_counter++;                                       //Таймера ожидания карты
