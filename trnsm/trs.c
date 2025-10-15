@@ -1,4 +1,4 @@
-flash unsigned char zagolovok[]={"Transmitter v0.1.13"};  //  ВЕРСИЯ прошивки
+flash unsigned char zagolovok[]={"Transmitter v0.1.13DEBUG"};  //  ВЕРСИЯ прошивки
 #include <mega8.h>
 #include <delay.h>
 #include <string.h>
@@ -76,7 +76,7 @@ interrupt [EXT_INT1] void ext_int1_isr(void){
     ms_counter = 0;                               //Сброс таймера ожидания карты 
     timer = 0;
     RFID_WAITING_fail_flag = 0;
-    first_init_reader_flag =0;
+    first_init_reader_flag = 0;
 }
 //Обработчик прерывания от геркона
 interrupt [EXT_INT0] void ext_int0_isr(void){
@@ -84,7 +84,7 @@ interrupt [EXT_INT0] void ext_int0_isr(void){
     ms_counter = 0;                               //Сброс таймера ожидания карты 
     timer = 0;
     RFID_WAITING_fail_flag = 0;
-    first_init_reader_flag =0;
+    first_init_reader_flag = 0;
 }
 //Обработчик прерывания по времени работы 
 interrupt [TIM1_OVF] void timer1_ovf_isr(void){
@@ -92,17 +92,18 @@ interrupt [TIM1_OVF] void timer1_ovf_isr(void){
     //if (timer >= RFID_FORGET && Reed_switch == 1){          //Раз в 8 сек проверяет прошло ли 10 минут и Разомкнулся ли геркон
         //memset(RAM_RFID_buffer, 0, RFID_PACKET_LENGTH);     //Очистка памяти
         //timer = 0;
-        if (Reed_switch == 1){
-            if (first_init_reader_flag == 1){
-                if (Order_conf_LED_flag == 0){
-                    //power_mode(3);
-                }
+    if (Reed_switch == 1){
+        if (first_init_reader_flag == 1){
+            if (Order_conf_LED_flag == 0){
+                //power_mode(3);
             }
+        }
     }
 }
 //ms_timer
 interrupt [TIM2_COMP] void timer2_compare_isr(void){
-    //Обработчик антидребезга геркона
+       
+    //Обработчик антидребезга геркона  (Изначальный, полная логика)
     if (first_init_reader_flag == 0 && Reed_switch == 0){   //Если геркон замкнут и ридер не включался   
         ms_counter_debounce++;                              //Таймер антидребезга
         if (ms_counter_debounce > DEBOUNCE_MS ){            //Если пин в одном положении по времени > времени дребезга 
@@ -111,16 +112,53 @@ interrupt [TIM2_COMP] void timer2_compare_isr(void){
             ms_counter_debounce = 0;                        //Сброс таймера дребезга                                                 
         }
     } 
-
+    /*
+    //Обработчик антидребезга геркона  (Отключен антидребезг)
+    if (first_init_reader_flag == 0 && Reed_switch == 0){   //Если геркон замкнут и ридер не включался   
+        ms_counter_debounce++;                              //Таймер антидребезга
+        //if (ms_counter_debounce > DEBOUNCE_MS )
+        {            //Если пин в одном положении по времени > времени дребезга 
+            first_init_reader_flag = 1;                     //Переключаем флаг включения ридера
+            POWER_Reader = 0;                               //Включаем ридер !!ИНВЕРТИРОВАНО!!
+            ms_counter_debounce = 0;                        //Сброс таймера дребезга                                                 
+        }
+    }
+    
+    //Обработчик антидребезга геркона  (Отключен флаг первого вызова)
+    if (Reed_switch == 0){   //Если геркон замкнут и ридер не включался   
+        ms_counter_debounce++;                              //Таймер антидребезга
+        if (ms_counter_debounce > DEBOUNCE_MS )
+        {            //Если пин в одном положении по времени > времени дребезга 
+            first_init_reader_flag = 1;                     //Переключаем флаг включения ридера
+            POWER_Reader = 0;                               //Включаем ридер !!ИНВЕРТИРОВАНО!!
+            ms_counter_debounce = 0;                        //Сброс таймера дребезга                                                 
+        }
+    }
+    
+        //Обработчик антидребезга геркона  (Отключен флаг первого вызова и антидребезг)
+    if (Reed_switch == 0){   //Если геркон замкнут и ридер не включался   
+        ms_counter_debounce++;                              //Таймер антидребезга
+        //if (ms_counter_debounce > DEBOUNCE_MS )
+        {            //Если пин в одном положении по времени > времени дребезга 
+            first_init_reader_flag = 1;                     //Переключаем флаг включения ридера
+            POWER_Reader = 0;                               //Включаем ридер !!ИНВЕРТИРОВАНО!!
+            ms_counter_debounce = 0;                        //Сброс таймера дребезга                                                 
+        }
+    }
+    */
+    
+    
+    /* ОТКЛЮЧЕНА ЛОГИКа ВЫКЛЮЧЕНИЯ ЧЕРЕЗ МИНУТУ (На всякий случай, может быть в ней проблема)
     //Обработчик ложного срабатывания
     if (RFID_WAITING_fail_flag == 0){                       //Флаг ожидания карты
         ms_counter++;                                       //Таймера ожидания карты
         if (ms_counter >= RFID_WAITING) {                   //Отключение после RFID_WAITING мс без считывания карты      
-            RFID_WAITING_fail_flag == 1;                    //Флаг что карта не считана
+            RFID_WAITING_fail_flag = 1;                     //Флаг что карта не считана
             POWER_Reader = 1;                               //Выключаем ридер !!ИНВЕРТИРОВАНО!!
             ms_counter = 0;                                 //Сброс таймера ожидания карты
         }
     } 
+    */
     
     //Обработчик включения светодиода
     if (Order_conf_LED_flag == 1){                          //Если флаг светодиода активен 
@@ -139,6 +177,10 @@ char msg[18];                           //Переменная для подготовки сообщения к 
 char number_trs[] = "33";               //Номер передатчика
 //Инициализация
 {
+    //UART_ENABLE();                  // uart работает  
+    //TIMER_ENABLE();                 // timer1 работает  
+    //MS_TIMER_ENABLE();              // timer2 работает  
+
     adc_config();                       //Настройка ADC1
     uart_config();                      //Настройка UART
     timer_config();                     //Настройка таймера1

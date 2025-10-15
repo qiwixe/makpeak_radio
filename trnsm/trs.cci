@@ -1,4 +1,4 @@
-VERSION:3 SOURCE_TIMESTAMP:5B4E8971
+VERSION:3 SOURCE_TIMESTAMP:5B4F701A
 NODE:C LEVEL:0 LINE:1 "zagolovok -> FLASH"
 NODE:I LEVEL:0 LINE:2 "E:\cvavr\inc\mega8.h"
 NODE:I LEVEL:0 LINE:3 "E:\cvavr\inc\delay.h"
@@ -20,4 +20,4 @@ NODE:F LEVEL:0 LINE:74 "ext_int1_isr(void)"
 NODE:F LEVEL:0 LINE:82 "ext_int0_isr(void)"
 NODE:F LEVEL:0 LINE:90 "timer1_ovf_isr(void)"
 NODE:F LEVEL:0 LINE:104 "timer2_compare_isr(void)"
-NODE:F LEVEL:0 LINE:135 "main(void)"
+NODE:F LEVEL:0 LINE:173 "main(void)"

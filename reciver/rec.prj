@@ -9,7 +9,7 @@ D=01.08.2025
 Files=2
 OpenedFiles=5
 OF1=rec.c
-ActiveTab=5
+ActiveTab=1
 DebugOutputListFilesDirectory=Debug\List
 DebugOutputObjectFilesDirectory=Debug
 DebugOutputExecutableFilesDirectory=Debug\Exe
@@ -20,7 +20,7 @@ OutputExecutableFilesDirectory=Release\Exe
 OutputLinkerFilesDirectory=Release\Link
 AllowDisplayFunctionCallTree=0
 CleanUp=2
-TimeStamp1=1529572692
+TimeStamp1=1531873806
 OF2=rec_function.h
 TimeStamp2=1529572692
 TimeStamp0=1526950028
@@ -495,7 +495,7 @@ Row=0
 Column=0
 ScrollPosX=0
 ScrollPosY=0
-TimeStamp=1531872293
+TimeStamp=1531873972
 [BookmarksFoldedCode]
 Files=7
 F1=C:\Users\qiwix\OneDrive\Desktop\reciver\rec.c
@@ -578,11 +578,11 @@ L10=[.dseg] 0x000060 0x000184      0     36     36    1024   3.5%
 L11=[.eseg] 0x000000 0x000000      0      0      0     512   0.0%
 L12=
 [Bookmarks2]
-TimeStamp=1529572692
-Row=53
-Column=74
+TimeStamp=1531873806
+Row=24
+Column=92
 ScrollPosX=0
-ScrollPosY=34
+ScrollPosY=0
 BK0=-1
 BK1=-1
 BK2=-1
@@ -682,16 +682,6 @@ BK6=-1
 BK7=-1
 BK8=-1
 BK9=-1
-[FoldedCode2]
-Blocks=0
-[FoldedCode4]
-Blocks=0
-[FoldedCode5]
-Blocks=0
-[FoldedCode6]
-Blocks=0
-[FoldedCode7]
-Blocks=0
 [HeadersList]
 Files=2
 F1=C:\Users\qiwix\OneDrive\Desktop\makpeak_radio\reciver\rec.c
@@ -716,3 +706,13 @@ F5=E:\cvavr\inc\stdio.h
 F6=E:\cvavr\inc\io.h
 F7=E:\cvavr\inc\stdarg.h
 F8=rec_function.h
+[FoldedCode2]
+Blocks=0
+[FoldedCode4]
+Blocks=0
+[FoldedCode5]
+Blocks=0
+[FoldedCode6]
+Blocks=0
+[FoldedCode7]
+Blocks=0
